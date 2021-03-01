@@ -1,0 +1,14 @@
+#! /bin/bash
+cd /usr/lib/librephotos/backend
+
+python3 manage.py build_similarity_index 2>&1 | tee $BASE_LOGS/command_build_similarity_index.log
+python3 manage.py clear_cache
+
+if [ "$DEBUG" = 1 ]
+then
+    echo "develompent backend starting"
+   gunicorn  --worker-class=gevent --timeout 36000 --reload --bind localhost:8001 --log-level=info ownphotos.wsgi 2>&1 | tee $BASE_LOGS/gunicorn_django.log
+else
+    echo "production backend starting"
+    gunicorn  --worker-class=gevent --timeout 3600 --bind localhost:8001 --log-level=info ownphotos.wsgi 2>&1 | tee $BASE_LOGS/gunicorn_django.log
+fi

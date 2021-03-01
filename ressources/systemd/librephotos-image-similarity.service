@@ -1,0 +1,15 @@
+[Unit]
+Description=librephotos-image-similarity
+Documentation=https://github.com/LibrePhotos/librephotos
+
+After=network.target
+
+[Service]
+User=librephotos
+Group=librephotos 
+EnvironmentFile=/etc/librephotos/librephotos-image-similarity.env
+ExecStart=/usr/lib/librephotos/bin/librephotos-image-similarity
+WorkingDirectory=/usr/lib/librephotos/backend
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,20 @@
+[Unit]
+Description=librephotos-backend
+Documentation=https://github.com/LibrePhotos/librephotos
+
+#Default case
+After=network.target
+
+# case when PostgreSQL is on localhost
+# After=network.target postgresql.service
+# Requires=postgresql.service
+
+[Service]
+User=librephotos
+Group=librephotos 
+EnvironmentFile=/etc/librephotos/librephotos-backend.env
+ExecStart=/usr/lib/librephotos/bin/librephotos-backend
+WorkingDirectory=/usr/lib/librephotos/backend
+
+[Install]
+WantedBy=multi-user.target
