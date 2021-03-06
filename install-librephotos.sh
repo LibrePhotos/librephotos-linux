@@ -2,8 +2,8 @@
 set -exa
 
 # PRE INSTALL
-grep librephotos /etc/group > /dev/null || groupadd -r librephotos
-grep librephotos /etc/passwd > /dev/null || useradd --home-dir /usr/lib/librephotos --comment "librephotos user" -g librephotos -mr -s /usr/sbin/nologin librephotos
+id -g librephotos > /dev/null || groupadd -r librephotos
+id -u librephotos > /dev/null || useradd --home-dir /usr/lib/librephotos --comment "librephotos user" -g librephotos -mr -s /usr/sbin/nologin librephotos
 
 export BASE_DATA=/var/lib/librephotos/
 export BASE_LOGS=/var/log/librephotos/
