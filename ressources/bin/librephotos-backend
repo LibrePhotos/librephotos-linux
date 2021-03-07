@@ -10,5 +10,5 @@ then
    gunicorn  --worker-class=gevent --timeout 36000 --reload --bind localhost:8001 --log-level=info ownphotos.wsgi 2>&1 | tee $BASE_LOGS/gunicorn_django.log
 else
     echo "production backend starting"
-    gunicorn  --worker-class=gevent --timeout 3600 --bind localhost:8001 --log-level=info ownphotos.wsgi 2>&1 | tee $BASE_LOGS/gunicorn_django.log
+    gunicorn  --threads=4 --worker-class=gevent --timeout 3600 --bind localhost:8001 --log-level=info ownphotos.wsgi 2>&1 | tee $BASE_LOGS/gunicorn_django.log
 fi
