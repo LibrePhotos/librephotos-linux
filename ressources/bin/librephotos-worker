@@ -1,0 +1,2 @@
+#! /bin/bash
+python3 manage.py rqworker default 2>&1 | tee $BASE_LOGS/rqworker.log

@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+cd /usr/lib/librephotos/frontend
+npm install
+if [ "$DEBUG" = 1 ]
+then
+    echo "develompent running frontend"
+    npm run start
+else
+    echo "productions running frontend"
+    ./node_modules/.bin/serve build -d -l 3000
+fi
