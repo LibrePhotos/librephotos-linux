@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
 export ADMIN_USERNAME=$1
 export ADMIN_EMAIL=$2
-export ADMIN_PASSWORD=$3
-[[ "$ADMIN_PASSWORD" == "" ]] && read -p "Password : " ADMIN_PASSWORD
-su - -s /usr/bin/bash librephotos << EOF
+export ADMIN_PASSWORD_PARAM=$3
+[[ "$ADMIN_PASSWORD_PARAM" == "" ]] && read -p "Password : " ADMIN_PASSWORD_PARAM
+su - -s $(which bash) librephotos << EOF
 set -a
 source /etc/librephotos/librephotos-backend.env
-export ADMIN_PASSWORD
+export ADMIN_PASSWORD=$ADMIN_PASSWORD_PARAM
+echo $ADMIN_PASSWORD
 python3 /usr/lib/librephotos/backend/manage.py createadmin -u $ADMIN_USERNAME $ADMIN_EMAIL
 EOF

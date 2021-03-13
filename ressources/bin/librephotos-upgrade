@@ -1,6 +1,11 @@
-#! /bin/bash
+#!/usr/bin/env bash
+su - -s $(which bash) librephotos << EOF
 cd /usr/lib/librephotos/backend
-
-python3 manage.py showmigrations | tee $BASE_LOGS/show_migrate.log
-python3 manage.py migrate | tee $BASE_LOGS/command_migrate.log
-python3 manage.py showmigrations | tee $BASE_LOGS/show_migrate.log
+set -a
+source /etc/librephotos/librephotos-backend.env
+export BASE_LOGS
+echo $DB_BACKEND
+python3 manage.py showmigrations
+python3 manage.py migrate 
+python3 manage.py showmigrations
+EOF

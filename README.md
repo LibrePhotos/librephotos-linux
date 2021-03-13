@@ -33,6 +33,11 @@ Edit /etc/librephotos/librephotos-backend
 nano /etc/librephotos/librephotos-backend
 ~~~
 
+Create or update database
+~~~
+/usr/lib/librephotos/bin/librephotos-upgrade
+~~~
+
 Create admin user as root with the following commande
 ~~~
 /usr/lib/librephotos/bin/librephotos-createadmin <user> <email> [<paswword>]
@@ -51,6 +56,14 @@ not working yet
 
 ## additional information
 
+### for local postgresql and redis
+
+Install postgresql and redis
+
+~~~
+apt install postgresql redis
+~~~
+
 ### librephotos-cli
 
 As root you can use 
@@ -62,10 +75,18 @@ librephotos-cli clear_cache
 
 ### Postgresql creation database script
 
+Open sql console
+~~~
+su - postgres -c /usr/bin/psql
+~~~
+
+Execute the bellow script after change values like password and UTF8 locales
+
 ~~~
 CREATE USER librephotos WITH PASSWORD 'password';
 CREATE DATABASE "librephotos" WITH OWNER "librephotos" ENCODING 'UTF8' LC_COLLATE = 'fr_FR.UTF-8' LC_CTYPE = 'fr_FR.UTF-8' TEMPLATE template0;
 GRANT ALL privileges ON DATABASE librephotos TO librephotos;
+quit
 ~~~
 
 ### Samba mount point sample

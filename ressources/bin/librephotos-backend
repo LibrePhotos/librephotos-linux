@@ -1,11 +1,12 @@
-#! /bin/bash
+#!/usr/bin/env bash
 cd /usr/lib/librephotos/backend
 
 python3 manage.py build_similarity_index 2>&1 | tee $BASE_LOGS/command_build_similarity_index.log
 python3 manage.py clear_cache
 
 NB_WORKER=2
-which nproc > /dev/null && NB_WORKER=$(($(nproc)*2))
+NB_PER_PROC=1
+which nproc > /dev/null && NB_WORKER=$(($(nproc)*$NB_PER_PROC))
 
 if [ "$DEBUG" = 1 ]
 then

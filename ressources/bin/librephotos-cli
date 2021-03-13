@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 export PARAMS=$*
-su - -s /usr/bin/bash librephotos << EOF
+su - -s $(which bash) librephotos << EOF
 set -a
 source /etc/librephotos/librephotos-backend.env
 python3 /usr/lib/librephotos/backend/manage.py $PARAMS

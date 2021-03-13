@@ -1,2 +1,2 @@
-#! /bin/bash
+#!/usr/bin/env bash
 python3 image_similarity/main.py 2>&1 | tee $BASE_LOGS/image_similarity.log
