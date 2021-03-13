@@ -12,7 +12,7 @@
 Execute following commande as root
 ~~~
 cd /tmp/
-git clone git@github.com:LibrePhotos/librephotos-linux.git
+git clone https://github.com/LibrePhotos/librephotos-linux.git
 cd librephotos-linux
 ./install-librephotos.sh 
 ~~~
