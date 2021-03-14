@@ -1,9 +1,38 @@
 # LibrePhotos installation script for Linux
 
-## requirement 
-  - Debian 11 (python 3.9)
+## Comaptibility
+  - Debian 11
+  - Ubuntu 20.04
+
+## Pre-Installation
+
+### requirement 
   - postgresql
   - redis
+
+### for local postgresql and redis
+
+Install postgresql and redis
+
+~~~
+apt install postgresql redis
+~~~
+
+### Postgresql creation database script
+
+Open sql console
+~~~
+su - postgres -c /usr/bin/psql
+~~~
+
+Execute the bellow script after change values like password and user
+
+~~~
+CREATE USER librephotos WITH PASSWORD 'password';
+CREATE DATABASE "librephotos" WITH OWNER "librephotos";
+GRANT ALL privileges ON DATABASE librephotos TO librephotos;
+quit
+~~~
 
 ## Installation
 
@@ -50,19 +79,12 @@ systemctl start librephotos-worker.service
 systemctl start librephotos-backend
 systemctl start librephotos-frontend
 ~~~
+
 ### Other distribution
 
 not working yet
 
 ## additional information
-
-### for local postgresql and redis
-
-Install postgresql and redis
-
-~~~
-apt install postgresql redis
-~~~
 
 ### librephotos-cli
 
@@ -71,22 +93,6 @@ As root you can use
 ~~~
 librephotos-cli build_similarity_index
 librephotos-cli clear_cache
-~~~
-
-### Postgresql creation database script
-
-Open sql console
-~~~
-su - postgres -c /usr/bin/psql
-~~~
-
-Execute the bellow script after change values like password and user
-
-~~~
-CREATE USER librephotos WITH PASSWORD 'password';
-CREATE DATABASE "librephotos" WITH OWNER "librephotos";
-GRANT ALL privileges ON DATABASE librephotos TO librephotos;
-quit
 ~~~
 
 ### Samba mount point sample
