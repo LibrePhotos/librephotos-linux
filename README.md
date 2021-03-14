@@ -1,9 +1,38 @@
 # LibrePhotos installation script for Linux
 
-## requirement 
-  - Debian 11 (python 3.9)
+## Compatibility
+  - Debian 11
+  - Ubuntu 20.04
+
+## Pre-Installation
+
+### requirement 
   - postgresql
   - redis
+
+### for local postgresql and redis
+
+Install postgresql and redis
+
+~~~
+apt install postgresql redis
+~~~
+
+### Postgresql creation database script
+
+Open sql console
+~~~
+su - postgres -c /usr/bin/psql
+~~~
+
+Execute the bellow script after change values like password and user
+
+~~~
+CREATE USER librephotos WITH PASSWORD 'password';
+CREATE DATABASE "librephotos" WITH OWNER "librephotos";
+GRANT ALL privileges ON DATABASE librephotos TO librephotos;
+quit
+~~~
 
 ## Installation
 
@@ -12,7 +41,7 @@
 Execute following commande as root
 ~~~
 cd /tmp/
-git clone git@github.com:LibrePhotos/librephotos-linux.git
+git clone https://github.com/LibrePhotos/librephotos-linux.git
 cd librephotos-linux
 ./install-librephotos.sh 
 ~~~
@@ -33,6 +62,11 @@ Edit /etc/librephotos/librephotos-backend
 nano /etc/librephotos/librephotos-backend
 ~~~
 
+Create or update database
+~~~
+/usr/lib/librephotos/bin/librephotos-upgrade
+~~~
+
 Create admin user as root with the following commande
 ~~~
 /usr/lib/librephotos/bin/librephotos-createadmin <user> <email> [<paswword>]
@@ -45,6 +79,7 @@ systemctl start librephotos-worker.service
 systemctl start librephotos-backend
 systemctl start librephotos-frontend
 ~~~
+
 ### Other distribution
 
 not working yet
@@ -58,14 +93,6 @@ As root you can use
 ~~~
 librephotos-cli build_similarity_index
 librephotos-cli clear_cache
-~~~
-
-### Postgresql creation database script
-
-~~~
-CREATE USER librephotos WITH PASSWORD 'password';
-CREATE DATABASE "librephotos" WITH OWNER "librephotos" ENCODING 'UTF8' LC_COLLATE = 'fr_FR.UTF-8' LC_CTYPE = 'fr_FR.UTF-8' TEMPLATE template0;
-GRANT ALL privileges ON DATABASE librephotos TO librephotos;
 ~~~
 
 ### Samba mount point sample
