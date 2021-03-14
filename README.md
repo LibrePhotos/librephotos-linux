@@ -80,11 +80,11 @@ Open sql console
 su - postgres -c /usr/bin/psql
 ~~~
 
-Execute the bellow script after change values like password and UTF8 locales
+Execute the bellow script after change values like password and user
 
 ~~~
 CREATE USER librephotos WITH PASSWORD 'password';
-CREATE DATABASE "librephotos" WITH OWNER "librephotos" ENCODING 'UTF8' LC_COLLATE = 'fr_FR.UTF-8' LC_CTYPE = 'fr_FR.UTF-8' TEMPLATE template0;
+CREATE DATABASE "librephotos" WITH OWNER "librephotos";
 GRANT ALL privileges ON DATABASE librephotos TO librephotos;
 quit
 ~~~
