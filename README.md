@@ -1,6 +1,6 @@
 # LibrePhotos installation script for Linux
 
-## Comaptibility
+## Compatibility
   - Debian 11
   - Ubuntu 20.04
 
