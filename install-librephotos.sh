@@ -5,11 +5,11 @@ set -exa
 id -g librephotos > /dev/null || groupadd -r librephotos
 id -u librephotos > /dev/null || useradd --home-dir /usr/lib/librephotos --comment "librephotos user" -g librephotos -mr -s /usr/sbin/nologin librephotos
 
-export BASE_DATA=/var/lib/librephotos/
-export BASE_LOGS=/var/log/librephotos/
+export BASE_DATA=/var/lib/librephotos
+export BASE_LOGS=/var/log/librephotos
 
-[ -d $BASE_LOGS ] || mkdir -p $BASE_LOGS
-[ -d $BASE_DATA ] || mkdir -p $BASE_DATA
+mkdir -p $BASE_LOGS
+mkdir -p $BASE_DATA/{data_models/places365,data_models/im2txt,data/nextcloud_media,protected_media}
 chown -R librephotos:librephotos $BASE_LOGS
 chown -R librephotos:librephotos $BASE_DATA
 
@@ -21,10 +21,6 @@ liblapack-dev git bzip2 cmake build-essential libsm6 libglib2.0-0 libgl1-mesa-gl
 libheif-dev libssl-dev rustc liblzma-dev python3 python3-pip
 
 su - -s $(which bash) librephotos << EOF
-for folder in data_models/places365 data_models/im2txt data/nextcloud_media protected_media
-do
-	[ -d $folder ] || mkdir -p $BASE_DATA/$folder
-done
 curl -SL https://s3.eu-central-1.amazonaws.com/ownphotos-deploy/places365_model.tar.gz | tar -zxC $BASE_DATA/data_models/places365/
 curl -SL https://s3.eu-central-1.amazonaws.com/ownphotos-deploy/im2txt_model.tar.gz | tar -zxC $BASE_DATA/data_models/im2txt/
 curl -SL https://s3.eu-central-1.amazonaws.com/ownphotos-deploy/im2txt_data.tar.gz | tar -zxC $BASE_DATA/data_models/im2txt/
