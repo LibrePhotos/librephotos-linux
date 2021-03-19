@@ -8,8 +8,11 @@ id -u librephotos > /dev/null || useradd --home-dir /usr/lib/librephotos --comme
 export BASE_DATA=/var/lib/librephotos
 export BASE_LOGS=/var/log/librephotos
 
+    
 mkdir -p $BASE_LOGS
-mkdir -p $BASE_DATA/{data_models/places365,data_models/im2txt,data/nextcloud_media,protected_media}
+mkdir -p $BASE_DATA/data_models/{places365,im2txt}
+mkdir -p $BASE_DATA/protected_media/{thumbnails_big,square_thumbnails,square_thumbnails_small,faces}
+mkdir -p $BASE_DATA/data/nextcloud_media
 chown -R librephotos:librephotos $BASE_LOGS
 chown -R librephotos:librephotos $BASE_DATA
 
