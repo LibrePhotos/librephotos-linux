@@ -33,7 +33,7 @@ curl -SL https://download.pytorch.org/models/resnet152-b121ed2d.pth -o ~/.cache/
 pip3 install torch==1.7.1+cpu torchvision==0.8.2+cpu -f https://download.pytorch.org/whl/torch_stable.html
 pip3 install -v --install-option="--no" --install-option="DLIB_USE_CUDA" --install-option="--no" --install-option="USE_AVX_INSTRUCTIONS" --install-option="--no" --install-option="USE_SSE4_INSTRUCTIONS" dlib
 
-git clone https://github.com/tomamplius/librephotos backend
+git clone https://github.com/LibrePhotos/librephotos backend
 cd backend
 pip3 install -r requirements.txt
 python3 -m spacy download en_core_web_sm
