@@ -21,7 +21,7 @@ chown -R librephotos:librephotos $BASE_DATA
 apt install --no-install-recommends -y \
 swig libpq-dev postgresql-common curl libopenblas-dev libmagic1 libboost-all-dev libxrender-dev \
 liblapack-dev git bzip2 cmake build-essential libsm6 libglib2.0-0 libgl1-mesa-glx gfortran gunicorn \
-libheif-dev libssl-dev rustc liblzma-dev python3 python3-pip
+libheif-dev libssl-dev rustc liblzma-dev python3 python3-pip imagemagick
 
 su - -s $(which bash) librephotos << EOF
 curl -SL https://s3.eu-central-1.amazonaws.com/ownphotos-deploy/places365_model.tar.gz | tar -zxC $BASE_DATA/data_models/places365/
