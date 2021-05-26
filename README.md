@@ -25,7 +25,7 @@ Open sql console
 su - postgres -c /usr/bin/psql
 ~~~
 
-Execute the bellow script after change values like password and user
+Execute the bellow script changing values like password and username (you will input these on the config .env file)
 
 ~~~
 CREATE USER librephotos WITH PASSWORD 'password';
@@ -38,7 +38,7 @@ quit
 
 ### Debian like distribution
 
-Execute following commande as root
+Execute the following command as root
 ~~~
 cd /tmp/
 git clone https://github.com/LibrePhotos/librephotos-linux.git
@@ -46,7 +46,7 @@ cd librephotos-linux
 ./install-librephotos.sh 
 ~~~
 
-Other way can be use download archive
+An alternative would be to directly download the archive
 ~~~
 wget https://github.com/librephotos/librephotos-linux/archive/main.zip -O /tmp/main.zip
 unzip -d /tmp/ /tmp/main.zip
@@ -54,12 +54,25 @@ cd /tmp/librephotos-linux-main/
 ./install-librephotos.sh
 ~~~
 
-Edit /etc/librephotos/librephotos-backend
+Edit /etc/librephotos/librephotos-backend.env to input configuration variables such as:
+
  - SECRET_KEY
- - Postgresql information
+
+ - Postgresql information:
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=YOURDBNAME
+DB_USER=YOURUSER
+DB_PASS=YOURPASSWORD
+
  - redis information
+In case you configured it with a password or are using a special path.
+
+ - Mapbox API Key
+MAPBOX_API_KEY=YOURAPIKEY
+
 ~~~
-nano /etc/librephotos/librephotos-backend
+nano /etc/librephotos/librephotos-backend.env
 ~~~
 
 Create or update database
@@ -67,9 +80,9 @@ Create or update database
 /usr/lib/librephotos/bin/librephotos-upgrade
 ~~~
 
-Create admin user as root with the following commande
+Create admin user as root with the following command
 ~~~
-/usr/lib/librephotos/bin/librephotos-createadmin <user> <email> [<paswword>]
+/usr/lib/librephotos/bin/librephotos-createadmin <user> <email> <pasword>
 ~~~
 
 reboot or start services
@@ -95,7 +108,7 @@ librephotos-cli build_similarity_index
 librephotos-cli clear_cache
 ~~~
 
-### Samba mount point sample
+### Samba mount point example
 
 Install cifs-utils :
 
@@ -106,10 +119,11 @@ apt install cifs-utils
 On /etc/fstab add the following line :
 
 ~~~
+
 //data.lan.lgy.fr/ftcl/photos/ /var/lib/librephotos/data/photos cifs uid=librephotos,gid=librephotos,credentials=/etc/samba/smbcredentials,iocharset=utf8,file_mode=0777,dir_mode=0777,sec=ntlmssp,noacl 0 0
 ~~~
 
-create file /etc/samba/smbcredentials with bellow connexion informations
+create file /etc/samba/smbcredentials with bellow conection information
 
 ~~~
 username=thomas
