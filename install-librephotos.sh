@@ -19,7 +19,7 @@ chown -R librephotos:librephotos $BASE_DATA
 # LIBREPHOTOS : BACKEND
 
 apt install --no-install-recommends -y \
-swig libpq-dev postgresql-common curl libopenblas-dev libmagic1 libboost-all-dev libxrender-dev \
+swig ffmpeg libimage-exiftool-perl libpq-dev postgresql-common curl libopenblas-dev libmagic1 libboost-all-dev libxrender-dev \
 liblapack-dev git bzip2 cmake build-essential libsm6 libglib2.0-0 libgl1-mesa-glx gfortran gunicorn \
 libheif-dev libssl-dev rustc liblzma-dev python3 python3-pip imagemagick
 
