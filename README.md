@@ -29,7 +29,7 @@ Execute the bellow script changing values like password and username (you will i
 
 ~~~
 CREATE USER librephotos WITH PASSWORD 'password';
-CREATE DATABASE "librephotos" WITH OWNER "librephotos";
+CREATE DATABASE "librephotos" WITH OWNER "librephotos" WITH TEMPLATE = template0 ENCODING = "UTF8";
 GRANT ALL privileges ON DATABASE librephotos TO librephotos;
 quit
 ~~~
