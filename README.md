@@ -59,11 +59,13 @@ Edit /etc/librephotos/librephotos-backend.env to input configuration variables s
  - SECRET_KEY
 
  - Postgresql information:
+~~~
 DB_HOST=localhost
 DB_PORT=5432
 DB_NAME=YOURDBNAME
 DB_USER=YOURUSER
 DB_PASS=YOURPASSWORD
+~~~
 
  - redis information
 In case you configured it with a password or are using a special path.
