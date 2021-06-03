@@ -18,14 +18,14 @@ Install postgresql and redis
 apt install postgresql redis
 ~~~
 
-### Postgresql creation database script
+### Postgresql database creation script
 
 Open sql console
 ~~~
 su - postgres -c /usr/bin/psql
 ~~~
 
-Execute the bellow script changing values like password and username (you will input these on the config .env file)
+Execute the following script, changing values like password and username (you will input these on the config .env file)
 
 ~~~
 CREATE USER librephotos WITH PASSWORD 'password';
@@ -54,7 +54,7 @@ cd /tmp/librephotos-linux-main/
 ./install-librephotos.sh
 ~~~
 
-Edit /etc/librephotos/librephotos-backend.env to input configuration variables such as:
+Edit /etc/librephotos/librephotos-backend.env to store configuration variables, such as:
 
  - SECRET_KEY
 
