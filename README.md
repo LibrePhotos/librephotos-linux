@@ -118,14 +118,14 @@ Install cifs-utils :
 apt install cifs-utils
 ~~~
 
-On /etc/fstab add the following line :
+In /etc/fstab add the following line :
 
 ~~~
 
 //data.lan.lgy.fr/ftcl/photos/ /var/lib/librephotos/data/photos cifs uid=librephotos,gid=librephotos,credentials=/etc/samba/smbcredentials,iocharset=utf8,file_mode=0777,dir_mode=0777,sec=ntlmssp,noacl 0 0
 ~~~
 
-create file /etc/samba/smbcredentials with bellow conection information
+create file /etc/samba/smbcredentials with connection information like the following
 
 ~~~
 username=thomas
