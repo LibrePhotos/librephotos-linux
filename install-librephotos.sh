@@ -24,9 +24,9 @@ liblapack-dev git bzip2 cmake build-essential libsm6 libglib2.0-0 libgl1-mesa-gl
 libheif-dev libssl-dev rustc liblzma-dev python3 python3-pip imagemagick
 
 su - -s $(which bash) librephotos << EOF
-curl -SL https://s3.eu-central-1.amazonaws.com/ownphotos-deploy/places365_model.tar.gz | tar -zxC $BASE_DATA/data_models/places365/
-curl -SL https://s3.eu-central-1.amazonaws.com/ownphotos-deploy/im2txt_model.tar.gz | tar -zxC $BASE_DATA/data_models/im2txt/
-curl -SL https://s3.eu-central-1.amazonaws.com/ownphotos-deploy/im2txt_data.tar.gz | tar -zxC $BASE_DATA/data_models/im2txt/
+
+curl -SL https://github.com/LibrePhotos/librephotos-docker/releases/download/0.1/places365.tar.gz | tar -zxC $BASE_DATA/data_models/
+url -SL https://github.com/LibrePhotos/librephotos-docker/releases/download/0.1/im2txt.tar.gz | tar -zxC $BASE_DATA/data_models/
 mkdir -p ~/.cache/torch/hub/checkpoints/
 curl -SL https://download.pytorch.org/models/resnet152-b121ed2d.pth -o ~/.cache/torch/hub/checkpoints/resnet152-b121ed2d.pth
 
