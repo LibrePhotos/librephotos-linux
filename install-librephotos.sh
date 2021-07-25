@@ -33,7 +33,7 @@ curl -SL https://download.pytorch.org/models/resnet152-b121ed2d.pth -o ~/.cache/
 pip3 install torch==1.7.1+cpu torchvision==0.8.2+cpu -f https://download.pytorch.org/whl/torch_stable.html
 pip3 install -v --install-option="--no" --install-option="DLIB_USE_CUDA" --install-option="--no" --install-option="USE_AVX_INSTRUCTIONS" --install-option="--no" --install-option="USE_SSE4_INSTRUCTIONS" dlib
 
-git clone https://github.com/LibrePhotos/librephotos backend
+git clone https://github.com/LibrePhotos/librephotos/dev/67ea61a79dadff8772fa2e7915239840e45a630c backend
 cd backend
 pip3 install -r requirements.txt
 python3 -m spacy download en_core_web_sm
@@ -44,7 +44,7 @@ EOF
 apt-get install -y curl git xsel nodejs git npm --no-install-recommends
 
 su - -s $(which bash) librephotos << 'EOF'
-git clone https://github.com/LibrePhotos/librephotos-frontend frontend
+git clone https://github.com/LibrePhotos/librephotos-frontend/dev/86b2bb61b4a3e43e200d3fe22766b92c73c30e74 frontend
 cd frontend
 npm install
 npm run build
