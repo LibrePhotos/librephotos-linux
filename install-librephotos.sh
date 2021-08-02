@@ -46,7 +46,7 @@ apt-get install -y curl git xsel nodejs git npm --no-install-recommends
 su - -s $(which bash) librephotos << 'EOF'
 git clone https://github.com/LibrePhotos/librephotos-frontend/tree/86b2bb61b4a3e43e200d3fe22766b92c73c30e74 frontend
 cd frontend
-npm install
+npm install --legacy-peer-deps
 npm run build
 npm install serve
 EOF
