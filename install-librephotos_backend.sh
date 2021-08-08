@@ -21,8 +21,9 @@ chown -R librephotos:librephotos $BASE_DATA
 REQUIRED_PKG=( swig ffmpeg libimage-exiftool-perl libpq-dev postgresql-contrib curl libopenblas-dev libmagic1 libboost-all-dev libxrender-dev \
 liblapack-dev git bzip2 cmake build-essential libsm6 libglib2.0-0 libgl1-mesa-glx gfortran gunicorn \
 libheif-dev libssl-dev rustc liblzma-dev python3 python3-pip imagemagick redis )
-[ $(dpkg-query -W -f='${Status}' $i 2>/dev/null | grep -c "ok installed") -eq 0 ] && apt install --no-install-recommends -y $i > /dev/null 2>&1
-
+for i in "${REQUIRED_PKG[@]}"; do
+[ $(dpkg-query -W -f='${Status}' $i 2>/dev/null | grep -c "ok installed") -eq 0 ] && apt install --no-install-recommends -y $i
+done
 su - -s $(which bash) librephotos << EOF
 curl -SL https://github.com/LibrePhotos/librephotos-docker/releases/download/0.1/places365.tar.gz | tar -zxC $BASE_DATA/data_models/
 curl -SL https://github.com/LibrePhotos/librephotos-docker/releases/download/0.1/im2txt.tar.gz | tar -zxC $BASE_DATA/data_models/
