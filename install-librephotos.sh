@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-#################### HERE EDIT VARIABLES ##############################
+######################### HERE EDIT VARIABLES #############################
 # the location of photos. If changed here, also must change in nginx
 export BASE_DATA=/var/lib/librephotos
 export ADMIN_USERNAME=
@@ -8,8 +8,8 @@ export ADMIN_EMAIL=
 # Not mandatory:
 export MAPBOX_API_KEY=
 # If your hardware without AVX and SSE instructions, seach in this file
-'dlib' and read instructions :) In most cases this for the old hardware
-#################### END OF EDITABLE SECTION ##########################
+# 'dlib' and read instructions :) In most cases this for the old hardware
+######################### END OF EDITABLE SECTION ##########################
 
 set -ea
 # PRE INSTALL
