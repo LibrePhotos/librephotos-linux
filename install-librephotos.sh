@@ -55,12 +55,11 @@ curl -SL https://github.com/LibrePhotos/librephotos-docker/releases/download/0.1
 curl -SL https://github.com/LibrePhotos/librephotos-docker/releases/download/0.1/im2txt.tar.gz | tar -zxC $BASE_DATA/data_models/
 mkdir -p ~/.cache/torch/hub/checkpoints/
 curl -SL https://download.pytorch.org/models/resnet152-b121ed2d.pth -o ~/.cache/torch/hub/checkpoints/resnet152-b121ed2d.pth
-
 pip3 install torch==1.7.1+cpu torchvision==0.8.2+cpu -f https://download.pytorch.org/whl/torch_stable.html
-###########################################################################################################
-# Here seting up AVX and SSE support. 
-Comment out first line 'pip3 install...' and uncoment second. Must leave only one.
-##########################################################################################################
+#################################################################################################
+# Here seting up AVX and SSE support.  
+# Comment out first line 'pip3 install...' and uncoment second. Must leave only one.
+##################################################################################################
 pip3 install -v --install-option="--no" --install-option="DLIB_USE_CUDA" dlib
 #pip3 install -v --install-option="--no" --install-option="DLIB_USE_CUDA" --install-option="--no" --install-option="USE_AVX_INSTRUCTIONS" --install-option="--no" --install-option="USE_SSE4_INSTRUCTIONS" dlib
 
@@ -98,15 +97,12 @@ sed -i "s|BASE_DATA=|BASE_DATA=${BASE_DATA}|g" /etc/librephotos/librephotos-back
 sed -i "s|MAPBOX_API_KEY=|MAPBOX_API_KEY=${MAPBOX_API_KEY}|g" /etc/librephotos/librephotos-backend.env
 rm /tmp/database_pass
 
-systemctl enable librephotos-backend
-systemctl enable librephotos-worker.service
-systemctl enable librephotos-image-similarity.service
-
-/usr/lib/librephotos/bin/librephotos-upgrade
-
 systemctl start librephotos-backend
 systemctl start librephotos-worker.service
 systemctl start librephotos-image-similarity.service
+systemctl enable librephotos-backend
+systemctl enable librephotos-worker.service
+systemctl enable librephotos-image-similarity.service
 
 # LIBREPHOTOS : FRONTEND
 REQUIRED_PKG=( curl git xsel git )
