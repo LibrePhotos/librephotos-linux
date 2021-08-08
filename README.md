@@ -16,13 +16,15 @@ Can not login if the first letter of the ADMIN_USERNAME is capital. Do not use c
 
 ### Debian like distribution
 
-Execute the following commands as root. This will create systemuser 'librephotos', creates directories, installs necessary software, creates database and automaGically writes some variables to librephotos-backend.env file.
+Execute the following commands as root. Edit the begining of the script, and execute. This will create systemuser 'librephotos', creates directories, installs necessary software, creates database and automaGically writes some variables to librephotos-backend.env file.
 ~~~
 sudo su
 cd /tmp/
 git clone https://github.com/Seneliux/librephotos-linux.git
 cd librephotos-linux
 nano install-librephotos.sh
+~~~
+~~~
 ./install-librephotos.sh
 ~~~
 Admin password will store in /tmp/ADMIN_PASS.
