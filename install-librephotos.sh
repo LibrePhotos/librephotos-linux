@@ -71,7 +71,7 @@ python3 -m spacy download en_core_web_sm
 EOF
 
 # CREATING DATABASE
-su - postgres << EOF•••••••
+su - postgres << EOF
 psql -c 'CREATE USER librephotos;'
 psql -c 'CREATE DATABASE "librephotos" WITH OWNER "librephotos" TEMPLATE = template0 ENCODING = "UTF8";'
 psql -c 'GRANT ALL privileges ON DATABASE librephotos TO librephotos;'
