@@ -1,7 +1,7 @@
 # LibrePhotos installation script for Linux
 
 ## Compatibility
-- Ubuntu 20.04.2 LTS
+- Ubuntu 20.04.2 LTS.
 
 ## Pre-Installation
 
@@ -64,3 +64,6 @@ As root you can use
 librephotos-cli build_similarity_index
 librephotos-cli clear_cache
 ~~~
+## TO DO
+- [ ] remote / local user permissions to write to the photos folder (samba, webdav, nextcloud, nfs)
+- [ ] android sync (client, synthing, webdav) 
