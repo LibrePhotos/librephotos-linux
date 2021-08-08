@@ -36,7 +36,7 @@ In case you configured it with a password or are using a special path.
 nano /etc/librephotos/librephotos-backend.env
 ~~~
 
-## additional information
+## Additional information
 
 Installed services:
 ~~~
@@ -44,20 +44,15 @@ librephotos-image-similarity.service
 librephotos-worker.service
 librephotos-backend
 librephotos-frontend
-
-Installed services:
 ~~~
-librephotos-image-similarity.service
-librephotos-worker.service
-librephotos-backend
-librephotos-frontend
+
 ### librephotos-cli
 
 Update database (firs time this already done by script)
 ~~~
 /usr/lib/librephotos/bin/librephotos-upgrade
 ~~~
-Create admin user as root with the following command (firs time this already done by script)
+Create admin user as root with the following command (first time this already done by script).
 ~~~
 /usr/lib/librephotos/bin/librephotos-createadmin <user> <email> <pasword>
 ~~~
