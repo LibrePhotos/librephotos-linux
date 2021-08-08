@@ -1,0 +1,75 @@
+upstream librephotos {
+    server 127.0.0.1:3000;
+#    keepalive 8;
+        }
+
+server {
+listen 443 ssl http2;
+server_name librephotos.example.com;
+
+ssl_certificate /etc/letsencrypt/live/librephotos.example.com/fullchain.pem;
+ssl_certificate_key /etc/letsencrypt/librephotos.example.com/privkey.pem;
+include /etc/letsencrypt/options-ssl-nginx.conf;
+ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+
+
+# HTTP response headers borrowed from Nextcloud `.htaccess`
+add_header Referrer-Policy                      "no-referrer"   always;
+add_header X-Content-Type-Options               "nosniff"       always;
+add_header X-Download-Options                   "noopen"        always;
+add_header X-Frame-Options                      "SAMEORIGIN"    always;
+add_header X-Permitted-Cross-Domain-Policies    "none"          always;
+add_header X-Robots-Tag                         "none"          always;
+add_header X-XSS-Protection                     "1; mode=block" always;
+add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload;";
+
+# Remove X-Powered-By, which is an information leak
+fastcgi_hide_header X-Powered-By;
+add_header Permissions-Policy                   "geolocation=(self)" always;
+
+    location / {
+      # React routes are entirely on the App side in the web broswer
+      # Always proxy to root with the same page request when nginx 404s
+      error_page 404 /;
+      proxy_intercept_errors on;
+      proxy_set_header Host $host;
+      proxy_pass http://localhost:3000/;
+    }
+    location ~ ^/(api|media)/ {
+      proxy_set_header X-Forwarded-Proto $scheme;
+      proxy_set_header X-Real-IP $remote_addr;
+      proxy_set_header Host backend;
+      include uwsgi_params;
+      #issue with IPV6 on ubuntu 20.04
+      #unicorn need to listen on [::1]
+      proxy_pass http://127.0.0.1:8001;
+    }
+    # Django media
+    location /protected_media  {
+        internal;
+        alias /var/lib/librephotos/protected_media/;
+    }
+    # Original Photos
+    location /original  {
+        internal;
+        alias /var/lib/librephotos/data/;
+    }
+    # Nextcloud Original Photos
+    location /nextcloud_original  {
+        internal;
+        alias /var/lib/librephotos/data/nextcloud_media/;
+    }
+
+    location = /robots.txt {
+         add_header Content-Type text/plain;
+         return 200 "User-agent: *\nDisallow: /\n";
+         access_log /var/log/nginx/robots.access custom;
+         }
+
+  }
+
+  server  {
+          listen          80;
+          server_name     librephotos.example.com;
+          return          301 https://$server_name$request_uri;
+  }

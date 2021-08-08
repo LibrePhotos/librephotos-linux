@@ -1,133 +1,70 @@
 # LibrePhotos installation script for Linux
 
 ## Compatibility
-  NOT WORKING YET
+- Ubuntu 20.04.2 LTS (server)
 
 ## Pre-Installation
 
-### requirement 
-  - postgresql
-  - redis
-
-### for local postgresql and redis
-
-Install postgresql and redis
-
+Install git:
 ~~~
-apt install postgresql redis
+sudo apt install git -y
 ~~~
+## ISSUES
+Can not login if the first letter of the ADMIN_USERNAME is capital. Do not use capital letters in user names.
 
-### Postgresql database creation script
-
-Open sql console
-~~~
-su - postgres -c /usr/bin/psql
-~~~
-
-Execute the following script, changing values like password and username (you will input these on the config .env file)
-
-~~~
-CREATE USER librephotos WITH PASSWORD 'password';
-CREATE DATABASE "librephotos" WITH OWNER "librephotos" WITH TEMPLATE = template0 ENCODING = "UTF8";
-GRANT ALL privileges ON DATABASE librephotos TO librephotos;
-quit
-~~~
 
 ## Installation
 
 ### Debian like distribution
 
-Execute the following command as root
+Execute the following commands as root. Edit the begining of the script, and execute. This will create systemuser 'librephotos', creates directories, installs necessary software, creates database and automaGically writes some variables to librephotos-backend.env file.
 ~~~
+sudo su
 cd /tmp/
-git clone https://github.com/LibrePhotos/librephotos-linux.git
+git clone https://github.com/Seneliux/librephotos-linux.git
 cd librephotos-linux
-./install-librephotos.sh 
+nano install-librephotos.sh
 ~~~
-
-An alternative would be to directly download the archive
 ~~~
-wget https://github.com/librephotos/librephotos-linux/archive/main.zip -O /tmp/main.zip
-unzip -d /tmp/ /tmp/main.zip
-cd /tmp/librephotos-linux-main/
 ./install-librephotos.sh
 ~~~
+Admin password will store in /tmp/ADMIN_PASS. 
+After changing the photos directory, must edit one of the `/etc/nginx/nginx.conf` or `/etc/nginx/sites-available/librephotos`. There are three places `alias /var/lib/librephotos`.
 
-Edit /etc/librephotos/librephotos-backend.env to store configuration variables, such as:
-
- - SECRET_KEY
-
- - Postgresql information:
-~~~
-DB_HOST=localhost
-DB_PORT=5432
-DB_NAME=YOURDBNAME
-DB_USER=YOURUSER
-DB_PASS=YOURPASSWORD
-~~~
+Edit `/etc/librephotos/librephotos-backend.env` to store configuration variables, such as:
 
  - redis information
 In case you configured it with a password or are using a special path.
-
- - Mapbox API Key
-MAPBOX_API_KEY=YOURAPIKEY
 
 ~~~
 nano /etc/librephotos/librephotos-backend.env
 ~~~
 
-Create or update database
-~~~
-/usr/lib/librephotos/bin/librephotos-upgrade
-~~~
+## Additional information
 
-Create admin user as root with the following command
+Installed systemd services:
 ~~~
-/usr/lib/librephotos/bin/librephotos-createadmin <user> <email> <pasword>
+librephotos-image-similarity.service
+librephotos-worker.service
+librephotos-backend
+librephotos-frontend
 ~~~
-
-reboot or start services
-~~~
-systemctl start librephotos-image-similarity.service
-systemctl start librephotos-worker.service
-systemctl start librephotos-backend
-systemctl start librephotos-frontend
-~~~
-
-### Other distribution
-
-not working yet
-
-## additional information
 
 ### librephotos-cli
 
-As root you can use 
-
+Update database (firs time this already done by script)
+~~~
+/usr/lib/librephotos/bin/librephotos-upgrade
+~~~
+Create admin user as root with the following command (first time this already done by script).
+~~~
+/usr/lib/librephotos/bin/librephotos-createadmin <user> <email> <pasword>
+~~~
+As root you can use
 ~~~
 librephotos-cli build_similarity_index
 librephotos-cli clear_cache
 ~~~
-
-### Samba mount point example
-
-Install cifs-utils :
-
-~~~
-apt install cifs-utils
-~~~
-
-In /etc/fstab add the following line :
-
-~~~
-
-//data.lan.lgy.fr/ftcl/photos/ /var/lib/librephotos/data/photos cifs uid=librephotos,gid=librephotos,credentials=/etc/samba/smbcredentials,iocharset=utf8,file_mode=0777,dir_mode=0777,sec=ntlmssp,noacl 0 0
-~~~
-
-create file /etc/samba/smbcredentials with connection information like the following
-
-~~~
-username=thomas
-password=mypassword
-domain=my.domain.com
-~~~
+## TO DO
+- [ ] remote / local user permissions to write to the photos folder (samba, webdav, nextcloud, nfs)
+- [ ] android sync (client, synthing, webdav) 
