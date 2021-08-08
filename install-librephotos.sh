@@ -13,14 +13,14 @@ export MAPBOX_API_KEY=
 
 set -ea
 # PRE INSTALL
-id -g librephotos > /dev/null || groupadd -r l•••••••ibrephotos
+id -g librephotos > /dev/null || groupadd -r librephotos
 id -u librephotos > /dev/null || useradd --home-dir /usr/lib/librephotos --comment "librephotos user" -g librephotos -mr -s /usr/sbin/nologin librephotos
 
 export BASE_LOGS=/var/log/librephotos
 
 mkdir -p $BASE_LOGS
 mkdir -p $BASE_DATA/data_models/{places365,im2txt}
-mkdir -p $BASE_DATA/protected_media/{thumbnail•••••••s_big,square_thumbnails,square_thumbnails_small,faces}
+mkdir -p $BASE_DATA/protected_media/{thumbnails_big,square_thumbnails,square_thumbnails_small,faces}
 mkdir -p $BASE_DATA/data/nextcloud_media
 chown -R librephotos:librephotos $BASE_LOGS
 chown -R librephotos:librephotos $BASE_DATA
