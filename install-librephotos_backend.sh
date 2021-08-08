@@ -30,7 +30,6 @@ libjpeg-turbo8-dev librsvg2-dev libpng-dev libwebp-dev)
 for i in "${REQUIRED_PKG[@]}"; do
 [ $(dpkg-query -W -f='${Status}' $i 2>/dev/null | grep -c "ok installed") -eq 0 ] && apt install --no-install-recommends -y $i
 done
-cd
 wget https://github.com/libvips/libvips/releases/download/v8.11.2/vips-8.11.2.tar.gz
 tar xf vips-8.11.2.tar.gz
 cd vips-8.11.2
