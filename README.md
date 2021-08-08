@@ -14,7 +14,7 @@ sudo apt install git -y
 
 ### Debian like distribution
 
-Execute the following commands as root. This will create systemuser 'librephotos', creates directories, install necessary software, creates database and automaGically writes some variables to librephotos-backend.env file.
+Execute the following commands as root. This will create systemuser 'librephotos', creates directories, installs necessary software, creates database and automaGically writes some variables to librephotos-backend.env file.
 ~~~
 sudo su
 cd /tmp/
@@ -30,7 +30,7 @@ In case you configured it with a password or are using a special path.
 
  - Mapbox API Key
 MAPBOX_API_KEY=YOURAPIKEY
-
+ 
 ~~~
 nano /etc/librephotos/librephotos-backend.env
 ~~~
