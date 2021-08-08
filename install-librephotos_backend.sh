@@ -38,6 +38,7 @@ make
 make install
 ldconfig
 echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib' >>  /usr/lib/librephotos/.bashrc
+cd ..
 
 su - -s $(which bash) librephotos << EOF
 curl -SL https://github.com/LibrePhotos/librephotos-docker/releases/download/0.1/places365.tar.gz | tar -zxC $BASE_DATA/data_models/
