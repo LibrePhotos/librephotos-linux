@@ -27,7 +27,7 @@ nano install-librephotos.sh
 ~~~
 ./install-librephotos.sh
 ~~~
-Admin password will store in /tmp/ADMIN_PASS.
+Admin password will store in /tmp/ADMIN_PASS. 
 After changing the photos directory, must edit one of the `/etc/nginx/nginx.conf` or `/etc/nginx/sites-available/librephotos`. There are three places `alias /var/lib/librephotos`.
 
 Edit `/etc/librephotos/librephotos-backend.env` to store configuration variables, such as:
