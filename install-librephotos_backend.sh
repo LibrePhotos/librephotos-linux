@@ -8,7 +8,6 @@ id -u librephotos > /dev/null || useradd --home-dir /usr/lib/librephotos --comme
 export BASE_DATA=/foto
 export BASE_LOGS=/var/log/librephotos
 
-
 mkdir -p $BASE_LOGS
 mkdir -p $BASE_DATA/data_models/{places365,im2txt}
 mkdir -p $BASE_DATA/protected_media/{thumbnails_big,square_thumbnails,square_thumbnails_small,faces}
@@ -24,6 +23,23 @@ libheif-dev libssl-dev rustc liblzma-dev python3 python3-pip imagemagick redis )
 for i in "${REQUIRED_PKG[@]}"; do
 [ $(dpkg-query -W -f='${Status}' $i 2>/dev/null | grep -c "ok installed") -eq 0 ] && apt install --no-install-recommends -y $i
 done
+
+# This part compiles libvips.
+REQUIRED_PKG=( build-essential pkg-config libglib2.0-dev libexpat1-dev libgsf-1-dev liborc-dev libexif-dev libtiff-dev \
+libjpeg-turbo8-dev librsvg2-dev libpng-dev libwebp-dev)
+for i in "${REQUIRED_PKG[@]}"; do
+[ $(dpkg-query -W -f='${Status}' $i 2>/dev/null | grep -c "ok installed") -eq 0 ] && apt install --no-install-recommends -y $i
+done
+cd
+wget https://github.com/libvips/libvips/releases/download/v8.11.2/vips-8.11.2.tar.gz
+tar xf vips-8.11.2.tar.gz
+cd vips-8.11.2
+./configure
+make
+make install
+ldconfig
+echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib' >>  /usr/lib/librephotos/.bashrc
+
 su - -s $(which bash) librephotos << EOF
 curl -SL https://github.com/LibrePhotos/librephotos-docker/releases/download/0.1/places365.tar.gz | tar -zxC $BASE_DATA/data_models/
 curl -SL https://github.com/LibrePhotos/librephotos-docker/releases/download/0.1/im2txt.tar.gz | tar -zxC $BASE_DATA/data_models/
@@ -36,7 +52,13 @@ pip3 install -v --install-option="--no" --install-option="DLIB_USE_CUDA" dlib
 git clone https://github.com/Seneliux/librephotos.git backend
 cd backend
 pip3 install -r requirements.txt
-python3 -m spacy download en_core_web_sm
+python3 -m spacy download en_corhttps://github.com/owncloud/pyocclient/archive/master.zip
+pytz==2020.1
+PyExifTool==0.4.9
+pyvips==2.1.15
+rq==1.6.1
+six==1.15.0
+scipy==1.5.3e_web_sm
 EOF
 
 # CREATING DATABASE
@@ -68,3 +90,5 @@ rm /tmp/database_pass
 systemctl enable librephotos-backend
 systemctl enable librephotos-worker.service
 systemctl enable librephotos-image-similarity.service
+
+/usr/lib/librephotos/bin/librephotos-upgrade
