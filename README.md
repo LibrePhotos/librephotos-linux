@@ -22,6 +22,7 @@ sudo su
 cd /tmp/
 git clone https://github.com/Seneliux/librephotos-linux.git
 cd librephotos-linux
+nano install-librephotos.sh
 ./install-librephotos.sh
 ~~~
 Admin password will store in /tmp/ADMIN_PASS.
