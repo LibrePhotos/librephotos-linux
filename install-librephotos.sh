@@ -121,8 +121,10 @@ npm run build
 npm install serve
 EOF
 
+systemctl start librephotos-frontend
 systemctl enable librephotos-frontend
 ADMIN_PASS=$( < /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-12};)
+/usr/lib/librephotos/bin/librephotos-upgrade
 /usr/lib/librephotos/bin/librephotos-createadmin ${ADMIN_USERNAME} ${ADMIN_EMAIL} ${ADMIN_PASS}
 echo ${ADMIN_PASS} > /tmp/ADMIN_PASS
 
