@@ -41,7 +41,7 @@ nano /etc/librephotos/librephotos-backend.env
 
 ## Additional information
 
-Installed services:
+Installed systemd services:
 ~~~
 librephotos-image-similarity.service
 librephotos-worker.service
