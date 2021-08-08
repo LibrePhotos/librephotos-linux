@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 #################### HERE EDIT VARIABLES ##############################
-# the location of photos
+# the location of photos. If changed here, also must change in nginx
 export BASE_DATA=/var/lib/librephotos
 export ADMIN_USERNAME=
 export ADMIN_EMAIL=
