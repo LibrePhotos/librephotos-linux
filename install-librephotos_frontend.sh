@@ -12,6 +12,7 @@ done
 
 [ $(dpkg-query -W -f='${Status}' nodejs 2>/dev/null | grep -c "ok installed") -eq 0 ] && \
 curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash - && apt install nodejs -y --no-install-recommends
+npm install -g yarn
 
 su - -s $(which bash) librephotos << EOF
 git clone https://github.com/Seneliux/librephotos-frontend.git frontend
