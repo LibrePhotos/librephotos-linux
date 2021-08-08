@@ -1,7 +1,7 @@
 # LibrePhotos installation script for Linux
 
 ## Compatibility
-- Ubuntu 20.04.2 LTS.
+- Ubuntu 20.04.2 LTS (server)
 
 ## Pre-Installation
 
