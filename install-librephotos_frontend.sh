@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
-set -exa
-
-export BASE_DATA=/foto
-export BASE_LOGS=/var/log/librephotos
+set -ea
 
 # LIBREPHOTOS : FRONTEND
 REQUIRED_PKG=( curl git xsel git )
