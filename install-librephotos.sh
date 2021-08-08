@@ -7,6 +7,8 @@ export ADMIN_USERNAME=
 export ADMIN_EMAIL=
 # Not mandatory:
 export MAPBOX_API_KEY=
+# If your hardware without AVX and SSE instructions, seach in this file
+'dlib' and read instructions :) In most cases this for the old hardware
 #################### END OF EDITABLE SECTION ##########################
 
 set -ea
@@ -55,7 +57,12 @@ mkdir -p ~/.cache/torch/hub/checkpoints/
 curl -SL https://download.pytorch.org/models/resnet152-b121ed2d.pth -o ~/.cache/torch/hub/checkpoints/resnet152-b121ed2d.pth
 
 pip3 install torch==1.7.1+cpu torchvision==0.8.2+cpu -f https://download.pytorch.org/whl/torch_stable.html
+###########################################################################################################
+# Here seting up AVX and SSE support
+comment out first line 'pip3 install...' and uncoment second. Must leave one.
+##########################################################################################################
 pip3 install -v --install-option="--no" --install-option="DLIB_USE_CUDA" dlib
+#pip3 install -v --install-option="--no" --install-option="DLIB_USE_CUDA" --install-option="--no" --install-option="USE_AVX_INSTRUCTIONS" --install-option="--no" --install-option="USE_SSE4_INSTRUCTIONS" dlib
 
 git clone https://github.com/Seneliux/librephotos.git backend
 cd backendvar/lib/librephotos

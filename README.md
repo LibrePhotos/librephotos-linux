@@ -9,6 +9,8 @@ Install git:
 ~~~
 sudo apt install git -y
 ~~~
+## ISSUES
+Can not login if the first letter of the ADMIN_USERNAME is capital. Do not use capital letters in user names.
 
 ## Installation
 
@@ -22,6 +24,8 @@ git clone https://github.com/Seneliux/librephotos-linux.git
 cd librephotos-linux
 ./install-librephotos.sh
 ~~~
+Admin password will store in /tmp/ADMIN_PASS.
+After changing the photos directory, must edit one of the `/etc/nginx/nginx.conf` or `/etc/nginx/sites-available/librephotos`. There are three places `alias /var/lib/librephotos`.
 
 Edit `/etc/librephotos/librephotos-backend.env` to store configuration variables, such as:
 
