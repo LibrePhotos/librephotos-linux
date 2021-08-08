@@ -24,7 +24,7 @@ for i in "${REQUIRED_PKG[@]}"; do
 [ $(dpkg-query -W -f='${Status}' $i 2>/dev/null | grep -c "ok installed") -eq 0 ] && apt install --no-install-recommends -y $i
 done
 
-# This part compiles libvips.
+# This part compiles libvips. More info https://libvips.github.io/libvips/install.html
 REQUIRED_PKG=( build-essential pkg-config libglib2.0-dev libexpat1-dev libgsf-1-dev liborc-dev libexif-dev libtiff-dev \
 libjpeg-turbo8-dev librsvg2-dev libpng-dev libwebp-dev)
 for i in "${REQUIRED_PKG[@]}"; do
@@ -52,13 +52,7 @@ pip3 install -v --install-option="--no" --install-option="DLIB_USE_CUDA" dlib
 git clone https://github.com/Seneliux/librephotos.git backend
 cd backend
 pip3 install -r requirements.txt
-python3 -m spacy download en_corhttps://github.com/owncloud/pyocclient/archive/master.zip
-pytz==2020.1
-PyExifTool==0.4.9
-pyvips==2.1.15
-rq==1.6.1
-six==1.15.0
-scipy==1.5.3e_web_sm
+python3 -m spacy download en_core_web_sm
 EOF
 
 # CREATING DATABASE
