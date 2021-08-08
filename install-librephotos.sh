@@ -46,7 +46,7 @@ cd vips-8.11.2
 ./configure
 make
 make install
-ldconfigvar/lib/librephotos
+ldconfig
 echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib' >>  /usr/lib/librephotos/.bashrc
 cd ..
 
@@ -58,8 +58,8 @@ curl -SL https://download.pytorch.org/models/resnet152-b121ed2d.pth -o ~/.cache/
 
 pip3 install torch==1.7.1+cpu torchvision==0.8.2+cpu -f https://download.pytorch.org/whl/torch_stable.html
 ###########################################################################################################
-# Here seting up AVX and SSE support
-comment out first line 'pip3 install...' and uncoment second. Must leave one.
+# Here seting up AVX and SSE support. 
+Comment out first line 'pip3 install...' and uncoment second. Must leave only one.
 ##########################################################################################################
 pip3 install -v --install-option="--no" --install-option="DLIB_USE_CUDA" dlib
 #pip3 install -v --install-option="--no" --install-option="DLIB_USE_CUDA" --install-option="--no" --install-option="USE_AVX_INSTRUCTIONS" --install-option="--no" --install-option="USE_SSE4_INSTRUCTIONS" dlib
