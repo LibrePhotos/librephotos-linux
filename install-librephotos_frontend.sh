@@ -14,7 +14,7 @@ done
 curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash - && apt install nodejs -y --no-install-recommends
 
 su - -s $(which bash) librephotos << EOF
-https://github.com/Seneliux/librephotos-frontend.git frontend
+git clone https://github.com/Seneliux/librephotos-frontend.git frontend
 cd frontend
 npm install
 npm run build
