@@ -23,7 +23,7 @@ cd librephotos-linux
 ./install-librephotos_backend.sh
 ~~~
 
-Edit '/etc/librephotos/librephotos-backend.env' to store configuration variables, such as:
+Edit `/etc/librephotos/librephotos-backend.env` to store configuration variables, such as:
 
  - redis information
 In case you configured it with a password or are using a special path.
