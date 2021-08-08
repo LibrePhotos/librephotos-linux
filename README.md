@@ -1,7 +1,7 @@
 # LibrePhotos installation script for Linux
 
 ## Compatibility
-  NOT WORKING YET
+- Ubuntu 20.04.2 LTS
 
 ## Pre-Installation
 
@@ -20,7 +20,7 @@ sudo su
 cd /tmp/
 git clone https://github.com/Seneliux/librephotos-linux.git
 cd librephotos-linux
-./install-librephotos_backend.sh
+./install-librephotos.sh
 ~~~
 
 Edit `/etc/librephotos/librephotos-backend.env` to store configuration variables, such as:
@@ -28,37 +28,36 @@ Edit `/etc/librephotos/librephotos-backend.env` to store configuration variables
  - redis information
 In case you configured it with a password or are using a special path.
 
- - Mapbox API Key
-MAPBOX_API_KEY=YOURAPIKEY
- 
 ~~~
 nano /etc/librephotos/librephotos-backend.env
 ~~~
 
-Create or update database
+## additional information
+
+Installed services:
+~~~
+librephotos-image-similarity.service
+librephotos-worker.service
+librephotos-backend
+librephotos-frontend
+
+Installed services:
+~~~
+librephotos-image-similarity.service
+librephotos-worker.service
+librephotos-backend
+librephotos-frontend
+### librephotos-cli
+
+Update database (firs time this already done by script)
 ~~~
 /usr/lib/librephotos/bin/librephotos-upgrade
 ~~~
-
-Create admin user as root with the following command
+Create admin user as root with the following command (firs time this already done by script)
 ~~~
 /usr/lib/librephotos/bin/librephotos-createadmin <user> <email> <pasword>
 ~~~
-
-reboot or start services
-~~~
-systemctl start librephotos-image-similarity.service
-systemctl start librephotos-worker.service
-systemctl start librephotos-backend
-systemctl start librephotos-frontend
-~~~
-
-## additional information
-
-### librephotos-cli
-
 As root you can use
-
 ~~~
 librephotos-cli build_similarity_index
 librephotos-cli clear_cache

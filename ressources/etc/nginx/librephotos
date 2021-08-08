@@ -47,17 +47,17 @@ add_header Permissions-Policy                   "geolocation=(self)" always;
     # Django media
     location /protected_media  {
         internal;
-        alias /foto/protected_media/;
+        alias /var/lib/librephotos/protected_media/;
     }
     # Original Photos
     location /original  {
         internal;
-        alias /foto/data/;
+        alias /var/lib/librephotos/data/;
     }
     # Nextcloud Original Photos
     location /nextcloud_original  {
         internal;
-        alias /foto/data/nextcloud_media/;
+        alias /var/lib/librephotos/data/nextcloud_media/;
     }
 
     location = /robots.txt {
@@ -70,6 +70,6 @@ add_header Permissions-Policy                   "geolocation=(self)" always;
 
   server  {
           listen          80;
-           server_name     librephotos.example.com;
+          server_name     librephotos.example.com;
           return          301 https://$server_name$request_uri;
   }
