@@ -18,7 +18,7 @@ chown -R librephotos:librephotos $BASE_DATA
 
 # LIBREPHOTOS : BACKEND
 
-REQUIRED_PKG=( swig ffmpeg libimage-exiftool-perl libpq-dev postgresql-contrib curl libopenblas-dev libmagic1 libboost-all-dev libxrender-dev \
+REQUIRED_PKG=( swig ffmpeg libimage-exiftool-perl libpq-dev postgresql curl libopenblas-dev libmagic1 libboost-all-dev libxrender-dev \
 liblapack-dev git bzip2 cmake build-essential libsm6 libglib2.0-0 libgl1-mesa-glx gfortran gunicorn \
 libheif-dev libssl-dev rustc liblzma-dev python3 python3-pip imagemagick redis )
 for i in "${REQUIRED_PKG[@]}"; do
