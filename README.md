@@ -2,6 +2,7 @@
 
 ## Compatibility
 - Ubuntu 20.04.2 LTS (server)
+- Ubuntu 21.04 (desktop)
 
 ## Pre-Installation
 
