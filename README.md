@@ -13,25 +13,6 @@ sudo apt install git -y
 ## ISSUES
 Can not login if the first letter of the ADMIN_USERNAME is capital. Do not use capital letters in user names.
 
-<<<<<<< HEAD
-=======
-### Postgresql database creation script
-
-Open sql console
-~~~
-su - postgres -c /usr/bin/psql
-~~~
-
-Execute the following script, changing values like password and username (you will input these on the config .env file)
-
-~~~
-CREATE USER librephotos WITH PASSWORD 'password';
-CREATE DATABASE "librephotos" WITH OWNER "librephotos" TEMPLATE = template0 ENCODING = "UTF8";
-GRANT ALL privileges ON DATABASE librephotos TO librephotos;
-quit
-~~~
->>>>>>> 99ddcad337c40c571f239d655b86249232088ea1
-
 ## Installation
 
 ### Debian like distribution
