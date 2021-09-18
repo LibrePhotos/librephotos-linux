@@ -62,11 +62,11 @@ pip3 install torch==1.7.1+cpu torchvision==0.8.2+cpu -f https://download.pytorch
 ##################################################################################################
 pip3 install -v --install-option="--no" --install-option="DLIB_USE_CUDA" dlib
 #pip3 install -v --install-option="--no" --install-option="DLIB_USE_CUDA" --install-option="--no" --install-option="USE_AVX_INSTRUCTIONS" --install-option="--no" --install-option="USE_SSE4_INSTRUCTIONS" dlib
-
-git clone https://github.com/Seneliux/librephotos.git backend
+#This does only support x64 and not ARM. To install for ARM you have to build it from source 
+pip3 install faiss-cpu
+git clone https://github.com/LibrePhotos/librephotos.git backend
 cd backend
 pip3 install -r requirements.txt
-python3 -m spacy download en_core_web_sm
 EOF
 
 # CREATING DATABASE
@@ -114,7 +114,7 @@ done
 curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash - && apt install nodejs -y --no-install-recommends
 npm install -g yarn
 su - -s $(which bash) librephotos << EOF
-git clone https://github.com/Seneliux/librephotos-frontend.git frontend
+git clone https://github.com/LibrePhotos/librephotos-frontend.git frontend
 cd frontend
 npm install
 npm run build
