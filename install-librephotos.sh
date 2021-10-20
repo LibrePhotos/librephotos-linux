@@ -7,6 +7,7 @@ export ADMIN_USERNAME=
 export ADMIN_EMAIL=
 # Not mandatory:
 export MAPBOX_API_KEY=
+export FORWARDED_ALLOW_IPS=
 # If your hardware without AVX and SSE instructions, seach in this file
 # 'dlib' and read instructions :) In most cases this for the old hardware
 ######################### END OF EDITABLE SECTION ##########################
@@ -95,6 +96,7 @@ secret_key=$( < /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-16};)
 sed -i "s|SECRET_KEY=SecretKeyToBeDefined|SECRET_KEY=${secret_key}|g" /etc/librephotos/librephotos-backend.env
 sed -i "s|BASE_DATA=|BASE_DATA=${BASE_DATA}|g" /etc/librephotos/librephotos-backend.env
 sed -i "s|MAPBOX_API_KEY=|MAPBOX_API_KEY=${MAPBOX_API_KEY}|g" /etc/librephotos/librephotos-backend.env
+sed -i "s|FORWARDED_ALLOW_IPS=|FORWARDED_ALLOW_IPS=${FORWARDED_ALLOW_IPS}|g" /etc/librephotos/librephotos-backend.env
 rm /tmp/database_pass
 
 systemctl start librephotos-backend
