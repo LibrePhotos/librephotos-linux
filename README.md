@@ -1,5 +1,10 @@
 # LibrePhotos installation script for Linux
 
+Currently, these are in a early stage; some bugs may exist. If you find any, please log an issue
+
+## Contribution
+These are community maintained scripts to allow for a local install. If you have implemented an improvement, please consider opening up a pull request.
+
 ## Compatibility
 - Ubuntu 20.04.2 LTS (server)
 - Ubuntu 21.04 (desktop)
