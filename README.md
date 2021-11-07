@@ -15,8 +15,6 @@ Install git:
 ~~~
 sudo apt install git -y
 ~~~
-## ISSUES
-Can not login if the first letter of the ADMIN_USERNAME is capital. Do not use capital letters in user names.
 
 ## Installation
 
