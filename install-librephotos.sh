@@ -65,6 +65,7 @@ pip3 install -v --install-option="--no" --install-option="DLIB_USE_CUDA" dlib
 #pip3 install -v --install-option="--no" --install-option="DLIB_USE_CUDA" --install-option="--no" --install-option="USE_AVX_INSTRUCTIONS" --install-option="--no" --install-option="USE_SSE4_INSTRUCTIONS" dlib
 #This does only support x64 and not ARM. To install for ARM you have to build it from source 
 pip3 install faiss-cpu
+pip3 install pyvips
 git clone https://github.com/LibrePhotos/librephotos.git backend
 cd backend
 pip3 install -r requirements.txt
