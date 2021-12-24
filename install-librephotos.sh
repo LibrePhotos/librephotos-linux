@@ -71,7 +71,8 @@ for i in "${REQUIRED_PKG[@]}"; do
 wget http://fftw.org/fftw-3.3.10.tar.gz
 tar xf fftw-3.3.10.tar.gz
 cd fftw-3.3.10
-# FFTW. if CPU support sse2, avx, uncomment these:
+# FFTW. if CPU support sse2, avx, uncomment below.
+# More info about optimization: http://fftw.org/fftw3_doc/Installation-on-Unix.html
 ./configure --enable-threads --with-pic #--enable-sse2 --enable-avx
 make -j$(nproc --all)
 make install
