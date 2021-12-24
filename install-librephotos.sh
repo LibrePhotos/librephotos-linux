@@ -68,6 +68,7 @@ for i in "${REQUIRED_PKG[@]}"; do
 [ $(dpkg-query -W -f='${Status}' $i 2>/dev/null | grep -c "ok installed") -eq 0 ] && apt install --no-install-recommends -y $i
  done
 
+#Optimal. FFTW library.
 wget http://fftw.org/fftw-3.3.10.tar.gz
 tar xf fftw-3.3.10.tar.gz
 cd fftw-3.3.10
@@ -79,6 +80,7 @@ make install
 ldconfig
 cd ..
 
+# Compiling libvips from source. Installed libvips42 from repositories not working.
 wget https://github.com/libvips/libvips/releases/download/v8.12.1/vips-8.12.1.tar.gz
 tar xf vips-8.12.1.tar.gz
 cd vips-8.12.1
