@@ -135,6 +135,8 @@ EOF
 
 # CREATING DATABASE
 su - postgres << EOF
+psql -c 'DROP DATABASE IF EXISTS librephotos;'
+psql -c 'DROP USER IF EXISTS librephotos;'
 psql -c 'CREATE USER librephotos;'
 psql -c 'CREATE DATABASE "librephotos" WITH OWNER "librephotos" TEMPLATE = template0 ENCODING = "UTF8";'
 psql -c 'GRANT ALL privileges ON DATABASE librephotos TO librephotos;'
