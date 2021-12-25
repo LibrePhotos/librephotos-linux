@@ -39,6 +39,10 @@ REDIS=( \#REDIS_PASS= \#REDIS_DB= REDIS_HOST=localhost REDIS_PORT=6379 \#REDIS_P
 
 set -exa
 # PRE INSTALL
+# old user, if exist, removing and recreating new librephotos user
+check_user=$(awk -F: -v user=librephotos '$1 == user {print $1}' /etc/passwd)
+[[ $check_user ]] && userdel -rf librephotos
+[[ -d /usr/lib/librephotos ]] && rm -rf /usr/lib/librephotos
 id -g librephotos > /dev/null || groupadd -r librephotos
 id -u librephotos > /dev/null || useradd --home-dir /usr/lib/librephotos --comment "librephotos user" -g librephotos -mr -s /usr/sbin/nologin librephotos
 
