@@ -38,7 +38,8 @@ rm -r /var/log/librephotos
 ```bash
 rm -r $BASE_DATA/data_models/
 rm -r $BASE_DATA/protected_media
-rm -r /etc/librephotos/```  
+rm -r /etc/librephotos/
+```  
 
 ## systemd files
 ```bash
