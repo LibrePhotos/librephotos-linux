@@ -40,7 +40,7 @@ REDIS=( \#REDIS_PASS= \#REDIS_DB= REDIS_HOST=localhost REDIS_PORT=6379 \#REDIS_P
 
 set -exa
 # PRE INSTALL
-# old user, if exist, removing and recreating new librephotos user
+# if exist, removes old user
 check_user=$(awk -F: -v user=librephotos '$1 == user {print $1}' /etc/passwd)
 [[ $check_user ]] && userdel -rf librephotos
 [[ -d /usr/lib/librephotos ]] && rm -rf /usr/lib/librephotos
@@ -110,6 +110,7 @@ else
 echo "VIPS allready found on the system"
 echo "Sometimes older vips can cause problems."
 read -t 5 -p "If librephotos-backend not starting, try to uninstall vips and recompile again"
+fi
 
 su - -s $(which bash) librephotos << EOF
 curl -SL https://github.com/LibrePhotos/librephotos-docker/releases/download/0.1/places365.tar.gz | tar -zxC $BASE_DATA/data_models/
