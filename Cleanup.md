@@ -58,7 +58,7 @@ service nginx reload
 ```
 ### if nginx installed by the script  
 ```bash
-systemctl stpo nginx
+systemctl stop nginx
 apt remove --purge nginx
 ```
 ## Other software.  
