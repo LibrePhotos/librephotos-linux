@@ -7,7 +7,8 @@ These are community maintained scripts to allow for a local install. If you have
 
 ## Notes
 
-Script is not adopted to remote postgresql server.
+Script is not adopted to remote postgresql server.  
+If REDIS present on the system AND connection to it through socket, change socket permissions to 770.  librephotos user will be added to redis group.
 
 ## Compatibility
 - Ubuntu 20.04.x LTS (server)
