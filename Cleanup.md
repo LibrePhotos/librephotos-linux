@@ -1,4 +1,4 @@
-# Compiled software unisntallation  
+# Compiled software uninstallation  
 Go to the source folder, and run  
 ```bash
 make uninstall
