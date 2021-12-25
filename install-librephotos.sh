@@ -23,7 +23,8 @@ DB_HOST=localhost
 DB_PORT=5432
 
 # REDIS connection settings. Unnecessary settings comment with TWO SYMBOLS "\#" or delete.
-# set REDIS sock permissions to 770 and restart REDIS. Script adds librephotos to redis group.
+# If connection to REDIS  using sock, set REDIS sock permissions to 770 and restart it.
+# Script adds librephotos to redis group.
 # for sock connection leave uncommented only REDIS_PATH, all other settings comment out.
 REDIS=( \#REDIS_PASS= \#REDIS_DB= REDIS_HOST=localhost REDIS_PORT=6379 \#REDIS_PATH=/run/redis/redis-server.sock )
 
@@ -94,6 +95,7 @@ for i in "${REQUIRED_PKG[@]}"; do
 #cd ..
 
 # Compiling libvips from source. Installed libvips42 from repositories not working.
+if ! which vips; then
 wget https://github.com/libvips/libvips/releases/download/v8.12.1/vips-8.12.1.tar.gz
 tar xf vips-8.12.1.tar.gz
 cd vips-8.12.1
@@ -104,6 +106,10 @@ make install
 ldconfig
 echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib' >>  /usr/lib/librephotos/.bashrc
 cd ..
+else
+echo "VIPS allready found on the system"
+echo "Sometimes older vips can cause problems."
+read -t 5 -p "If librephotos-backend not starting, try to uninstall vips and recompile again"
 
 su - -s $(which bash) librephotos << EOF
 curl -SL https://github.com/LibrePhotos/librephotos-docker/releases/download/0.1/places365.tar.gz | tar -zxC $BASE_DATA/data_models/
