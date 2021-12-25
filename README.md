@@ -5,6 +5,10 @@ Currently, these are in a early stage; some bugs may exist. If you find any, ple
 ## Contribution
 These are community maintained scripts to allow for a local install. If you have implemented an improvement, please consider opening up a pull request.
 
+## Notes
+
+Script is not adopted to remote postgresql server.
+
 ## Compatibility
 - Ubuntu 20.04.x LTS (server)
 - Ubuntu 21.04 (desktop)
