@@ -63,22 +63,32 @@ done
 
 # This part compiles libvips. More info https://libvips.github.io/libvips/install.html
 REQUIRED_PKG=( build-essential pkg-config libglib2.0-dev libexpat1-dev libgsf-1-dev liborc-dev libexif-dev libtiff-dev \
-libjpeg-turbo8-dev librsvg2-dev libpng-dev libwebp-dev )
+ librsvg2-dev libpng-dev libwebp-dev )
 for i in "${REQUIRED_PKG[@]}"; do
 [ $(dpkg-query -W -f='${Status}' $i 2>/dev/null | grep -c "ok installed") -eq 0 ] && apt install --no-install-recommends -y $i
  done
 
-#Optimal. FFTW library.
-wget http://fftw.org/fftw-3.3.10.tar.gz
-tar xf fftw-3.3.10.tar.gz
-cd fftw-3.3.10
+# Some packages differs in Ubuntu and Debian. Here script checks distro and installs correct packages
+distro=$(lsb_release -i | awk '{print($3)}')
+# here Ubuntu packages
+[[ $distro == Ubuntu ]] && REQUIRED_PKG=( libjpeg-turbo8-dev )
+# here Debian packages
+[[ $distro == Debian ]] && REQUIRED_PKG=( libjpeg62-turbo-dev )
+for i in "${REQUIRED_PKG[@]}"; do
+[ $(dpkg-query -W -f='${Status}' $i 2>/dev/null | grep -c "ok installed") -eq 0 ] && apt install --no-install-recommends -y $i
+ done
+
+#Optimal. FFTW library. Fourier Transform can be used in the image edtion. Filters, effects, etc. Librephotos have not (yet) these features.
+#wget http://fftw.org/fftw-3.3.10.tar.gz
+#tar xf fftw-3.3.10.tar.gz
+#cd fftw-3.3.10
 # FFTW. if CPU support sse2, avx, uncomment below.
 # More info about optimization: http://fftw.org/fftw3_doc/Installation-on-Unix.html
-./configure --enable-threads --with-pic #--enable-sse2 --enable-avx
-make -j$(nproc --all)
-make install
-ldconfig
-cd ..
+#./configure --enable-threads --with-pic #--enable-sse2 --enable-avx
+#make -j$(nproc --all)
+#make install
+#ldconfig
+#cd ..
 
 # Compiling libvips from source. Installed libvips42 from repositories not working.
 wget https://github.com/libvips/libvips/releases/download/v8.12.1/vips-8.12.1.tar.gz
