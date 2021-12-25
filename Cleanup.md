@@ -5,7 +5,7 @@ make uninstall
 ```  
 
 Or dirty way:
-Delete all releated files in the /usr/local/include, also check in the /usr/local/.... documentation files, etc.  
+Delete all releated files in the `/usr/local/include`, also check in the `/usr/local/....` documentation files, etc.  
 
 # Cleanup database by droping it and user  
 ``` bash
