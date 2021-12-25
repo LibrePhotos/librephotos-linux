@@ -54,6 +54,13 @@ add_header Permissions-Policy                   "geolocation=(self)" always;
         # The begining of the path must be same like in the installation script BASE_DATA
         alias /var/lib/librephotos/protected_media/;
     }
+
+    location /data  {
+        internal;
+        # The begining of the path must be same like in the installation script BASE_DATA
+        alias /var/lib/librephotos/data/;
+    }
+
     # Original Photos
     location /original  {
         internal;
