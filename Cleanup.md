@@ -27,6 +27,10 @@ systemctl disable librephotos-backend
 systemctl disable librephotos-worker.service
 systemctl disable librephotos-image-similarity.service
 systemctl disable librephotos-backend
+``` 
+And removing service files:
+```bash
+rm -r /etc/systemd/system/librephotos-*
 ```
 
 # Cleanup folders  
@@ -41,10 +45,6 @@ rm -r $BASE_DATA/protected_media
 rm -r /etc/librephotos/
 ```  
 
-## systemd files
-```bash
-rm -r /etc/systemd/system/librephotos-*
-```
 ## unlinking    
 ```bash
 unlink /usr/sbin/librephotos-cli
