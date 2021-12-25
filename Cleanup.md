@@ -17,6 +17,7 @@ EOF
 ```
 
 # Delete system user and remove HOME
+Default home `/usr/lib/librephotos`. This action removes frontend, backend and all other files in the librephotos home.
 ```bash
 userdel -fr librephotos
 ```  
