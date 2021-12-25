@@ -1,6 +1,6 @@
 # How to cleanup (Ubuntu)
 
-# Almost all in one place  
+## Almost all in one place  
 This removes files from system, drps database. Installed from repositories or compiled software must remove manually.
 ``` bash
 su - postgres << EOF
