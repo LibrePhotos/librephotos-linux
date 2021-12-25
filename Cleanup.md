@@ -1,3 +1,7 @@
+# How to cleanup (Ubuntu)
+
+Some notes what to clean up.
+
 # Compiled software uninstallation  
 Go to the source folder, and run  
 ```bash
@@ -6,6 +10,8 @@ make uninstall
 
 Or dirty way:
 Delete all releated files in the `/usr/local/include`, also check in the `/usr/local/....` documentation files, etc.  
+
+Sometimes Librephotos not starting after installation. If on the systems left some old compiled packages, will result version mismatch, and gunicorn (backend) will not start. Uninstall compiled (local) software and try again.
 
 # Cleanup database by droping it and user  
 ``` bash
@@ -28,7 +34,7 @@ systemctl disable librephotos-backend
 systemctl disable librephotos-worker.service
 systemctl disable librephotos-image-similarity.service
 systemctl disable librephotos-backend
-``` 
+```
 And removing service files:
 ```bash
 rm -r /etc/systemd/system/librephotos-*
