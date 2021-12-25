@@ -32,7 +32,7 @@ nano install-librephotos.sh
 ./install-librephotos.sh
 ~~~
 Admin password will store in /tmp/ADMIN_PASS.
-After changing the photos directory, must edit one of the `/etc/nginx/nginx.conf` or `/etc/nginx/sites-available/librephotos`. There are three places `alias /var/lib/librephotos.
+After changing the photos directory, must edit one of the `/etc/nginx/nginx.conf` or `/etc/nginx/sites-available/librephotos`. There are four places `alias /var/lib/librephotos.
 
 No cheking Apache or any other web server exsistense on system. Please adopt script. Easies way to remove all lines, releated with nginx, and create virtual host in Apache.
 
