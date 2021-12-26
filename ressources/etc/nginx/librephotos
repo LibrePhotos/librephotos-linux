@@ -23,6 +23,10 @@ add_header X-Robots-Tag                         "none"          always;
 add_header X-XSS-Protection                     "1; mode=block" always;
 add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload;";
 
+access_log /var/log/nginx/librephotos.access;
+error_log /var/log/nginx/librephotos.error warn;
+
+
 # Remove X-Powered-By, which is an information leak
 fastcgi_hide_header X-Powered-By;
 add_header Permissions-Policy                   "geolocation=(self)" always;
@@ -47,16 +51,26 @@ add_header Permissions-Policy                   "geolocation=(self)" always;
     # Django media
     location /protected_media  {
         internal;
+        # The begining of the path must be same like in the installation script BASE_DATA
         alias /var/lib/librephotos/protected_media/;
     }
+
+    location /data  {
+        internal;
+        # The begining of the path must be same like in the installation script BASE_DATA
+        alias /var/lib/librephotos/data/;
+    }
+
     # Original Photos
     location /original  {
         internal;
+        # The begining of the path must be same like in the installation script BASE_DATA
         alias /var/lib/librephotos/data/;
     }
     # Nextcloud Original Photos
     location /nextcloud_original  {
         internal;
+        # The begining of the path must be same like in the installation script BASE_DATA
         alias /var/lib/librephotos/data/nextcloud_media/;
     }
 

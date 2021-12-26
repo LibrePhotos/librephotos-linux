@@ -2,12 +2,12 @@
 Description=librephotos-backend
 Documentation=https://github.com/LibrePhotos/librephotos
 
-#Default case
-After=network.target
+# case when PostgreSQL is on remote host
+#After=network.target
 
 # case when PostgreSQL is on localhost
-# After=network.target postgresql.service
-# Requires=postgresql.service
+After=network.target postgresql.service
+Requires=postgresql.service
 
 [Service]
 User=librephotos
