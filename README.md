@@ -11,8 +11,12 @@ Script is not adopted to remote postgresql server.
 If REDIS present on the system AND connection to it through socket, change socket permissions to 770.  librephotos user will be added to redis group.
 
 ## Compatibility
+Architecture:
+amd64
+
 - Ubuntu 20.04.x LTS (server)
 - Ubuntu 21.04 (desktop)
+- Debian
 
 ## Pre-Installation
 

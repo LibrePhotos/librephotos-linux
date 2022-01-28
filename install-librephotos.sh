@@ -217,4 +217,4 @@ echo "It is stored in /tmp/ADMIN_PASS. Memorize it now and delete this file."
 echo "If system has the nginx server before installing librephotos, edit virtual host /etc/nginx/librephotos and restart nginx."
 echo "Optimal: check other settings in the file /etc/librephotos/librephotos-backend.env"
 echo "After changing BASE_DATA, must edit file /etc/nginx/nginx.conf or /etc/nginx/sites-available/librephotos and change accordinaly"
-echo "alias. There  3 lines"-
+echo "alias. There  4 lines"-
