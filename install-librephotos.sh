@@ -189,6 +189,7 @@ su - -s $(which bash) librephotos << EOF
 git clone https://github.com/LibrePhotos/librephotos-frontend.git frontend
 cd frontend
 npm install
+npm run postinstall
 npm run build
 npm install serve
 EOF
