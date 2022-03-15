@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 cd /usr/lib/librephotos/frontend
-npm install
+npm install --legacy-peer-deps
+npm run postinstall
 if [ "$DEBUG" = 1 ]
 then
     echo "develompent running frontend"
