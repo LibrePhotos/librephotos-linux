@@ -47,6 +47,7 @@ id -u librephotos > /dev/null || useradd --home-dir /usr/lib/librephotos --comme
 export BASE_LOGS=/var/log/librephotos
 
 mkdir -p $BASE_LOGS
+mkdir -p $PHOTOS
 mkdir -p $BASE_DATA/data_models/{places365,im2txt,clip-embeddings}
 mkdir -p $BASE_DATA/protected_media/{thumbnails_big,square_thumbnails,square_thumbnails_small,faces}
 mkdir -p $BASE_DATA/nextcloud_media
