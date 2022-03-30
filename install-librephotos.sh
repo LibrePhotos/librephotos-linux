@@ -131,7 +131,7 @@ git clone https://github.com/LibrePhotos/librephotos.git backend
 cd backend
 pip3 install -r requirements.txt
 EOF
-
+systemctl start postgresql.service
 # CREATING DATABASE
 su - postgres << EOF
 psql -c 'DROP DATABASE IF EXISTS librephotos;'
