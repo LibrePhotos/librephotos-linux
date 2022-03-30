@@ -3,6 +3,7 @@
 Currently, these are in a early stage; some bugs may exist. If you find any, please log an issue
 
 ## Contribution
+
 These are community maintained scripts to allow for a local install. If you have implemented an improvement, please consider opening up a pull request.
 
 ## Notes
@@ -45,7 +46,6 @@ nano install-librephotos.sh
 ./install-librephotos.sh
 ```
 
-Admin password will store in /tmp/ADMIN_PASS.
 After changing the photos directory, must edit one of the `/etc/nginx/nginx.conf` or `/etc/nginx/sites-available/librephotos`. There are four places `alias /var/lib/librephotos.
 
 No cheking Apache or any other web server exsistense on system. Please adopt the script. Easiest way to remove all lines, releated with nginx, and create virtual host in Apache.
@@ -73,7 +73,7 @@ Update database (on the first time this is already done by the script)
 /usr/lib/librephotos/bin/librephotos-upgrade
 ```
 
-Create admin user as root with the following command (on the first time this is already done by the script)
+Create admin user as root with the following command
 
 ```
 /usr/lib/librephotos/bin/librephotos-createadmin <user> <email> <pasword>
@@ -85,6 +85,8 @@ As root you can use
 librephotos-cli build_similarity_index
 librephotos-cli clear_cache
 ```
+
 ## TO DO
+
 - [ ] remote / local user permissions to write to the photos folder (samba, webdav, nextcloud, nfs)
 - [ ] android sync (client, synthing, webdav)

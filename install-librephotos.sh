@@ -4,10 +4,6 @@
 # the location of photos. If changed here, also must change the path in thenginx virtual host.
 # /etc/nginx
 export BASE_DATA=/var/lib/librephotos
-export ADMIN_USERNAME=
-export ADMIN_EMAIL=
-# Not mandatory:
-export MAPBOX_API_KEY=
 # If your hardware without AVX and SSE instructions, seach in this file by keyword
 # 'dlib' and read instructions :) Modern system have these
 
@@ -196,10 +192,7 @@ EOF
 
 systemctl start librephotos-frontend
 systemctl enable librephotos-frontend
-ADMIN_PASS=$( < /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-12};)
 /usr/lib/librephotos/bin/librephotos-upgrade
-/usr/lib/librephotos/bin/librephotos-createadmin ${ADMIN_USERNAME} ${ADMIN_EMAIL} ${ADMIN_PASS}
-echo ${ADMIN_PASS} > /tmp/ADMIN_PASS
 
 # NGINX REVERSE PROXY
 
@@ -212,9 +205,6 @@ if [ $(dpkg-query -W -f='${Status}' nginx* 2>/dev/null | grep -c "ok installed")
     cp ressources/etc/nginx/librephotos /etc/nginx/sites-available/librephotos
     ln -s /etc/nginx/sites-available/librephotos /etc/nginx/sites-enabled/
 fi
-echo Your ADMIN_PASS is:
-cat /tmp/ADMIN_PASS
-echo "It is stored in /tmp/ADMIN_PASS. Memorize it now and delete this file."
 echo "If system has the nginx server before installing librephotos, edit virtual host /etc/nginx/librephotos and restart nginx."
 echo "Optimal: check other settings in the file /etc/librephotos/librephotos-backend.env"
 echo "After changing BASE_DATA, must edit file /etc/nginx/nginx.conf or /etc/nginx/sites-available/librephotos and change accordinaly"
