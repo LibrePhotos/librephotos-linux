@@ -86,6 +86,12 @@ librephotos-cli build_similarity_index
 librephotos-cli clear_cache
 ```
 
+## Docker command
+
+```
+docker run reallibrephotos/singleton -p 3000:3000  -v photos:/var/lib/librephotos/photos/ -v data:/var/lib/librephotos/data/ -v logs:/var/log/librephotos/
+```
+
 ## TO DO
 
 - [ ] remote / local user permissions to write to the photos folder (samba, webdav, nextcloud, nfs)

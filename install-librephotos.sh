@@ -3,7 +3,8 @@
 ######################### HERE EDIT VARIABLES ################################################
 # the location of photos. If changed here, also must change the path in thenginx virtual host.
 # /etc/nginx
-export BASE_DATA=/var/lib/librephotos
+export PHOTOS=/var/lib/librephotos/photos
+export BASE_DATA=/var/lib/librephotos/data
 # If your hardware without AVX and SSE instructions, seach in this file by keyword
 # 'dlib' and read instructions :) Modern system have these
 
@@ -48,8 +49,9 @@ export BASE_LOGS=/var/log/librephotos
 mkdir -p $BASE_LOGS
 mkdir -p $BASE_DATA/data_models/{places365,im2txt,clip-embeddings}
 mkdir -p $BASE_DATA/protected_media/{thumbnails_big,square_thumbnails,square_thumbnails_small,faces}
-mkdir -p $BASE_DATA/data/nextcloud_media
+mkdir -p $BASE_DATA/nextcloud_media
 chown -R librephotos:librephotos $BASE_LOGS
+chown -R librephotos:librephotos $PHOTOS
 chown -R librephotos:librephotos $BASE_DATA
 
 # LIBREPHOTOS : BACKEND
