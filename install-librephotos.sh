@@ -55,9 +55,30 @@ chown -R librephotos:librephotos $BASE_LOGS
 chown -R librephotos:librephotos $PHOTOS
 chown -R librephotos:librephotos $BASE_DATA
 
+# CREATING DATABASE
+REQUIRED_PKG=(postgresql)
+for i in "${REQUIRED_PKG[@]}"; do
+[ $(dpkg-query -W -f='${Status}' $i 2>/dev/null | grep -c "ok installed") -eq 0 ] && apt install --no-install-recommends -y $i
+done
+systemctl start postgresql.service
+systemctl enable postgresql.service
+su - postgres << EOF
+psql -c 'DROP DATABASE IF EXISTS librephotos;'
+psql -c 'DROP USER IF EXISTS librephotos;'
+psql -c 'CREATE USER librephotos;'
+psql -c 'CREATE DATABASE "librephotos" WITH OWNER "librephotos" TEMPLATE = template0 ENCODING = "UTF8";'
+psql -c 'GRANT ALL privileges ON DATABASE librephotos TO librephotos;'
+exit
+EOF
+echo 'su - postgres -c "psql -U postgres -d postgres -c \"alter user librephotos with password tmp_password;\""' > /tmp/database_pass
+pass=$( < /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-12};)
+sed -i "s|tmp_password|'${pass}'|g" /tmp/database_pass
+chmod +x /tmp/database_pass
+/tmp/database_pass
+
 # LIBREPHOTOS : BACKEND
 
-REQUIRED_PKG=( wget swig ffmpeg libimage-exiftool-perl libpq-dev postgresql curl libopenblas-dev libmagic1 libboost-all-dev libxrender-dev \
+REQUIRED_PKG=( wget swig ffmpeg libimage-exiftool-perl libpq-dev  curl libopenblas-dev libmagic1 libboost-all-dev libxrender-dev \
 liblapack-dev git bzip2 cmake build-essential libsm6 libglib2.0-0 libgl1-mesa-glx gfortran gunicorn \
 libheif-dev libssl-dev rustc liblzma-dev python3 python3-pip imagemagick redis-server )
 for i in "${REQUIRED_PKG[@]}"; do
@@ -131,22 +152,6 @@ git clone https://github.com/LibrePhotos/librephotos.git backend
 cd backend
 pip3 install -r requirements.txt
 EOF
-systemctl start postgresql.service
-systemctl enable postgresql.service
-# CREATING DATABASE
-su - postgres << EOF
-psql -c 'DROP DATABASE IF EXISTS librephotos;'
-psql -c 'DROP USER IF EXISTS librephotos;'
-psql -c 'CREATE USER librephotos;'
-psql -c 'CREATE DATABASE "librephotos" WITH OWNER "librephotos" TEMPLATE = template0 ENCODING = "UTF8";'
-psql -c 'GRANT ALL privileges ON DATABASE librephotos TO librephotos;'
-exit
-EOF
-echo 'su - postgres -c "psql -U postgres -d postgres -c \"alter user librephotos with password tmp_password;\""' > /tmp/database_pass
-pass=$( < /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-12};)
-sed -i "s|tmp_password|'${pass}'|g" /tmp/database_pass
-chmod +x /tmp/database_pass
-/tmp/database_pass
 
 # POST INSTALL
 
