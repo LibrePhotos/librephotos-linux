@@ -60,6 +60,11 @@ REQUIRED_PKG=(postgresql)
 for i in "${REQUIRED_PKG[@]}"; do
 [ $(dpkg-query -W -f='${Status}' $i 2>/dev/null | grep -c "ok installed") -eq 0 ] && apt install --no-install-recommends -y $i
 done
+if [ -z ${dockerdeploy} ] then
+else
+sed -i -e "s/.*listen_addresses.*/listen_addresses = '${LISTEN}'/" $PG/postgresql.conf
+sed -i -e "s/.*host.*ident/# &/" $PG/pg_hba.conf
+fi
 systemctl start postgresql.service
 systemctl enable postgresql.service
 su - postgres << EOF
@@ -75,6 +80,7 @@ pass=$( < /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-12};)
 sed -i "s|tmp_password|'${pass}'|g" /tmp/database_pass
 chmod +x /tmp/database_pass
 /tmp/database_pass
+
 
 # LIBREPHOTOS : BACKEND
 
