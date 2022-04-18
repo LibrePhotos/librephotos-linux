@@ -1,5 +1,6 @@
 FROM ubuntu:hirsute
 ENV DEBIAN_FRONTEND noninteractive
+RUN apt-get install systemd
 COPY docker/systemctl.py /usr/bin/systemctl.py
 RUN chmod +x /usr/bin/systemctl.py \
     && cp -f /usr/bin/systemctl.py /usr/bin/systemctl
