@@ -60,10 +60,11 @@ REQUIRED_PKG=(postgresql)
 for i in "${REQUIRED_PKG[@]}"; do
 [ $(dpkg-query -W -f='${Status}' $i 2>/dev/null | grep -c "ok installed") -eq 0 ] && apt install --no-install-recommends -y $i
 done
-if [ -z ${dockerdeploy} ] then
+if [ -z ${dockerdeploy} ]; then
+echo "Regular deploy";
 else
-sed -i -e "s/.*listen_addresses.*/listen_addresses = '${LISTEN}'/" $PG/postgresql.conf
-sed -i -e "s/.*host.*ident/# &/" $PG/pg_hba.conf
+sed -i -e "s/.*listen_addresses.*/listen_addresses = '${LISTEN}'/" $PG/postgresql.conf;
+sed -i -e "s/.*host.*ident/# &/" $PG/pg_hba.conf;
 fi
 systemctl start postgresql.service
 systemctl enable postgresql.service
