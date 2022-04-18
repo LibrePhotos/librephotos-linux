@@ -86,7 +86,7 @@ libheif-dev libssl-dev rustc liblzma-dev python3 python3-pip imagemagick redis-s
 for i in "${REQUIRED_PKG[@]}"; do
 [ $(dpkg-query -W -f='${Status}' $i 2>/dev/null | grep -c "ok installed") -eq 0 ] && apt install --no-install-recommends -y $i
 done
-redis-cli
+redis-server
 # This part compiles libvips. More info https://libvips.github.io/libvips/install.html
 REQUIRED_PKG=( build-essential pkg-config libglib2.0-dev libexpat1-dev libgsf-1-dev liborc-dev libexif-dev libtiff-dev \
  librsvg2-dev libpng-dev libwebp-dev )
