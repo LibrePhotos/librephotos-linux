@@ -63,6 +63,7 @@ done
 if [ -z ${dockerdeploy} ]; then
 echo "Regular deploy";
 else
+ENV PG /var/lib/pgsql/data
 sed -i -e "s/.*listen_addresses.*/listen_addresses = '${LISTEN}'/" $PG/postgresql.conf;
 sed -i -e "s/.*host.*ident/# &/" $PG/pg_hba.conf;
 fi
