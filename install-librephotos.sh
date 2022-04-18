@@ -60,13 +60,15 @@ REQUIRED_PKG=(postgresql)
 for i in "${REQUIRED_PKG[@]}"; do
 [ $(dpkg-query -W -f='${Status}' $i 2>/dev/null | grep -c "ok installed") -eq 0 ] && apt install --no-install-recommends -y $i
 done
+pg_ctlcluster 13 main start
 if [ -z ${dockerdeploy} ]; then
-echo "Regular deploy";
-else
+
 export PG=/var/lib/postgresql/13/main
 psql -U postgres -c 'SHOW config_file'
 sed -i -e "s/.*listen_addresses.*/listen_addresses = '${LISTEN}'/" $PG/postgresql.conf;
 sed -i -e "s/.*host.*ident/# &/" $PG/pg_hba.conf;
+else
+echo "Regular deploy";
 fi
 systemctl start postgresql.service
 systemctl enable postgresql.service
