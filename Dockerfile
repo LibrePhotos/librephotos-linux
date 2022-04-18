@@ -4,7 +4,6 @@ RUN apt-get update && apt-get install -y systemd
 COPY docker/systemctl.py /usr/bin/systemctl.py
 RUN chmod +x /usr/bin/systemctl.py \
     && cp -f /usr/bin/systemctl.py /usr/bin/systemctl
-RUN systemctl enable something
 COPY . librephotos-linux
 WORKDIR /librephotos-linux
 RUN apt update
