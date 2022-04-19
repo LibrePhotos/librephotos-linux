@@ -7,6 +7,7 @@ RUN chmod +x /usr/bin/systemctl.py \
     && cp -f /usr/bin/systemctl.py /usr/bin/systemctl
 COPY . librephotos-linux
 WORKDIR /librephotos-linux
-RUN apt update
 RUN ./install-librephotos.sh
 EXPOSE 3000
+COPY docker/entrypoint.sh /entrypoint.sh
+CMD ["/entrypoint.sh"]
