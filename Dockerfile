@@ -10,4 +10,4 @@ WORKDIR /librephotos-linux
 RUN ./install-librephotos.sh
 EXPOSE 3000
 COPY docker/entrypoint.sh /entrypoint.sh
-CMD ["/entrypoint.sh"]
+CMD ["bash","/entrypoint.sh"]
