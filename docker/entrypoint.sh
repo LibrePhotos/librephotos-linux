@@ -1,3 +1,5 @@
+#! /bin/bash
+
 systemctl start librephotos-worker.service && systemctl start librephotos-backend && systemctl start librephotos-image-similarity.service && echo
 systemctl enable librephotos-backend
 systemctl enable librephotos-worker.service
