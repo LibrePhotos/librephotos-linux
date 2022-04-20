@@ -8,5 +8,6 @@ RUN chmod +x /usr/bin/systemctl.py \
 COPY . librephotos-linux
 WORKDIR /librephotos-linux
 RUN ./install-librephotos.sh
+RUN useradd -m -G root librephotos
 EXPOSE 3000
 CMD ["/bin/bash","./docker/entrypoint.sh"]
