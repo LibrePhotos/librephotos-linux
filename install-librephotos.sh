@@ -204,7 +204,12 @@ EOF
 
 systemctl start librephotos-frontend
 systemctl enable librephotos-frontend
-/usr/lib/librephotos/bin/librephotos-upgrade
+
+if [[ -z "${DOCKERDEPLOY}" ]]; then
+    /usr/lib/librephotos/bin/librephotos-upgrade
+else
+  echo "skipping upgrade"
+fi
 
 # NGINX REVERSE PROXY
 
