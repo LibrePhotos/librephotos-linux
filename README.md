@@ -89,7 +89,7 @@ librephotos-cli clear_cache
 ## Docker command
 
 ```
-docker run reallibrephotos/singleton -p 3000:3000  -v photos:/var/lib/librephotos/photos/ -v data:/var/lib/librephotos/data/ -v logs:/var/log/librephotos/ -v db:/var/lib/postgresql/data/
+docker run -v photos:/var/lib/librephotos/photos/ -v thumbnails:/var/lib/librephotos/data/protected_media -v logs:/var/log/librephotos/ -v db:/var/lib/postgresql/data/ -p 3000:3000 reallibrephotos/singleton
 ```
 
 ## TO DO
