@@ -11,4 +11,5 @@ pg_ctlcluster 13 main start
 systemctl start postgresql.service
 systemctl enable postgresql.service
 /usr/lib/librephotos/bin/librephotos-upgrade
+systemctl restart nginx
 watch systemctl status librephotos-backend
