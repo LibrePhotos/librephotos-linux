@@ -7,7 +7,7 @@ systemctl enable librephotos-worker.service
 systemctl enable librephotos-image-similarity.service
 systemctl start librephotos-frontend
 systemctl enable librephotos-frontend
-pg_ctlcluster 13 main start
+sh ./postgres-entrypoint.sh
 systemctl start postgresql.service
 systemctl enable postgresql.service
 /usr/lib/librephotos/bin/librephotos-upgrade
