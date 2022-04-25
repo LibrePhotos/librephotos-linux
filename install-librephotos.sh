@@ -62,7 +62,7 @@ for i in "${REQUIRED_PKG[@]}"; do
 done
 
 if [[ -z "${DOCKERDEPLOY}" ]]; 
-  then
+then
     pg_ctlcluster 13 main start
     systemctl start postgresql.service
     systemctl enable postgresql.service
@@ -73,13 +73,13 @@ if [[ -z "${DOCKERDEPLOY}" ]];
     psql -c 'CREATE DATABASE "librephotos" WITH OWNER "librephotos" TEMPLATE = template0 ENCODING = "UTF8";'
     psql -c 'GRANT ALL privileges ON DATABASE librephotos TO librephotos;'
     exit
-    EOF
+    EOF  
     echo 'su - postgres -c "psql -U postgres -d postgres -c \"alter user librephotos with password tmp_password;\""' > /tmp/database_pass
     pass=$( < /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-12};)
     sed -i "s|tmp_password|'${pass}'|g" /tmp/database_pass
     chmod +x /tmp/database_pass
     /tmp/database_pass
-  else
+else
     echo "skipping db init"
 fi
 
