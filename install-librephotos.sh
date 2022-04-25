@@ -171,19 +171,20 @@ chown -R librephotos:librephotos  /usr/lib/librephotos/bin/
 cp -r ressources/etc/librephotos/ /etc/
 cp ressources/systemd/* /etc/systemd/system/
 
-sed -i "s|DB_PASS=password|DB_PASS=${pass}|g" /etc/librephotos/librephotos-backend.env
-secret_key=$( < /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-16};)
-sed -i "s|SECRET_KEY=SecretKeyToBeDefined|SECRET_KEY=${secret_key}|g" /etc/librephotos/librephotos-backend.env
-sed -i "s|BASE_DATA=|BASE_DATA=${BASE_DATA}|g" /etc/librephotos/librephotos-backend.env
-sed -i "s|MAPBOX_API_KEY=|MAPBOX_API_KEY=${MAPBOX_API_KEY}|g" /etc/librephotos/librephotos-backend.env
-sed -i "s|FORWARDED_ALLOW_IPS=|FORWARDED_ALLOW_IPS=${FORWARDED_ALLOW_IPS}|g" /etc/librephotos/librephotos-backend.env
+
 sed -i "s|DB_HOST=|DB_HOST=${DB_HOST}|g" /etc/librephotos/librephotos-backend.env
 sed -i "s|DB_PORT=|DB_PORT=${DB_PORT}|g" /etc/librephotos/librephotos-backend.env
+sed -i "s|DB_PASS=password|DB_PASS=${pass}|g" /etc/librephotos/librephotos-backend.env
+sed -i "s|FORWARDED_ALLOW_IPS=|FORWARDED_ALLOW_IPS=${FORWARDED_ALLOW_IPS}|g" /etc/librephotos/librephotos-backend.env
+sed -i "s|BASE_DATA=|BASE_DATA=${BASE_DATA}|g" /etc/librephotos/librephotos-backend.env
+
 for i in "${REDIS[@]}"; do
   echo $i >> /etc/librephotos/librephotos-backend.env
 done
-if [[ -z "${DOCKERDEPLOY}" ]]; then  
-  rm /tmp/database_pass
+if [[ -z "${DOCKERDEPLOY}" ]]; then
+    secret_key=$( < /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-16};)
+    sed -i "s|SECRET_KEY=SecretKeyToBeDefined|SECRET_KEY=${secret_key}|g" /etc/librephotos/librephotos-backend.env
+    rm /tmp/database_pass
 else
   echo "skipping temp database pass removal"
 fi
