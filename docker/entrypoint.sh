@@ -7,6 +7,7 @@ systemctl enable librephotos-worker.service
 systemctl enable librephotos-image-similarity.service
 systemctl start librephotos-frontend
 systemctl enable librephotos-frontend
+service postgresql start
 sh ./postgres-entrypoint.sh
 systemctl start postgresql.service
 systemctl enable postgresql.service
