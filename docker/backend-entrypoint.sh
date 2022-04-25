@@ -1,5 +1,5 @@
 #!/bin/bash
-
+cd /usr/lib/librephotos/backend
 if [ -n "$SECRET_KEY" ]
 then
     echo "Use env SECRET_KEY"
@@ -17,10 +17,11 @@ else
     fi
 fi
 
-su - -s $(which bash) librephotos << EOF
-cd /usr/lib/librephotos/backend
-set -a
+set -o allexport
 source /etc/librephotos/librephotos-backend.env
+set +o allexport
+
+cd /usr/lib/librephotos/backend
 python3 manage.py showmigrations 
 python3 manage.py migrate 
 python3 manage.py showmigrations
