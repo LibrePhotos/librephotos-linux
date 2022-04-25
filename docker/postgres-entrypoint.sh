@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -Eeo pipefail
+set -Ee pipefail
 # TODO swap to -Eeuo pipefail above (after handling all potentially-unset variables)
 
 # usage: file_env VAR [DEFAULT]
