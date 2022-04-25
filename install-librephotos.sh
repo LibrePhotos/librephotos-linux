@@ -182,7 +182,11 @@ sed -i "s|DB_PORT=|DB_PORT=${DB_PORT}|g" /etc/librephotos/librephotos-backend.en
 for i in "${REDIS[@]}"; do
   echo $i >> /etc/librephotos/librephotos-backend.env
 done
-rm /tmp/database_pass
+if [[ -z "${DOCKERDEPLOY}" ]]; then  
+  rm /tmp/database_pass
+else
+  echo "skipping temp database pass removal"
+fi
 
 systemctl start librephotos-worker.service && systemctl start librephotos-backend && systemctl start librephotos-image-similarity.service && echo
 systemctl enable librephotos-backend
