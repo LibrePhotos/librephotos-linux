@@ -11,7 +11,6 @@ service postgresql start
 bash ./postgres-entrypoint.sh
 systemctl start postgresql.service
 systemctl enable postgresql.service
-bash ./backend-entrypoint.sh
 systemctl restart nginx
 # keep container running
 while true; do sleep 1; done
