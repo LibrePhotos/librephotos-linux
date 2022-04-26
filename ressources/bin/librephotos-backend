@@ -1,11 +1,6 @@
 #!/usr/bin/env bash
 cd /usr/lib/librephotos/backend
 
-set -a
-source /etc/librephotos/librephotos-backend.env
-export BASE_LOGS
-echo $DB_BACKEND
-
 if [ -n "$SECRET_KEY" ]
 then
     echo "Use env SECRET_KEY"
