@@ -67,12 +67,6 @@ librephotos-frontend
 
 ### librephotos-cli
 
-Update database (on the first time this is already done by the script)
-
-```
-/usr/lib/librephotos/bin/librephotos-upgrade
-```
-
 Create admin user as root with the following command
 
 ```
