@@ -27,4 +27,3 @@ python3 manage.py migrate
 python3 manage.py showmigrations
 python3 manage.py clear_cache 
 echo "Running production backend server..."
-EOF
