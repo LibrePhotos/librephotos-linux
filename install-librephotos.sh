@@ -181,9 +181,8 @@ sed -i "s|BASE_DATA=|BASE_DATA=${BASE_DATA}|g" /etc/librephotos/librephotos-back
 for i in "${REDIS[@]}"; do
   echo $i >> /etc/librephotos/librephotos-backend.env
 done
+
 if [[ -z "${DOCKERDEPLOY}" ]]; then
-    secret_key=$( < /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-16};)
-    sed -i "s|SECRET_KEY=SecretKeyToBeDefined|SECRET_KEY=${secret_key}|g" /etc/librephotos/librephotos-backend.env
     rm /tmp/database_pass
 else
   echo "skipping temp database pass removal"
@@ -215,12 +214,6 @@ EOF
 
 systemctl start librephotos-frontend
 systemctl enable librephotos-frontend
-
-if [[ -z "${DOCKERDEPLOY}" ]]; then
-    /usr/lib/librephotos/bin/librephotos-upgrade
-else
-  echo "skipping upgrade"
-fi
 
 # NGINX REVERSE PROXY
 
