@@ -1,6 +1,26 @@
 #!/usr/bin/env bash
 cd /usr/lib/librephotos/backend
 
+if [ -n "$SECRET_KEY" ]
+then
+    echo "Use env SECRET_KEY"
+else 
+    if [ -f $BASE_LOGS/secret.key ]
+    then
+        echo "Use existing secret.key"
+        SECRET_KEY=`cat $BASE_LOGS/secret.key`
+        export SECRET_KEY=$SECRET_KEY
+    else
+        echo "Create new secret.key"
+        SECRET_KEY=$(python3 -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())')
+        echo $SECRET_KEY > $BASE_LOGS/secret.key
+        export SECRET_KEY=$SECRET_KEY
+    fi
+fi
+
+python3 manage.py showmigrations 
+python3 manage.py migrate 
+python3 manage.py showmigrations
 python3 manage.py build_similarity_index 2>&1 | tee $BASE_LOGS/command_build_similarity_index.log
 python3 manage.py clear_cache
 
@@ -10,7 +30,7 @@ which nproc > /dev/null && NB_WORKER=$(($(nproc)*$NB_PER_PROC))
 
 if [ "$DEBUG" = 1 ]
 then
-    echo "develompent backend starting"
+    echo "development backend starting"
     gunicorn --workers=$NB_WORKER --worker-class=gevent --timeout 36000 --reload --bind localhost:8001 --log-level=info ownphotos.wsgi 2>&1 | tee $BASE_LOGS/gunicorn_django.log
 else
     echo "production backend starting"
