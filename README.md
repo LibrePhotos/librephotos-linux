@@ -67,12 +67,6 @@ librephotos-frontend
 
 ### librephotos-cli
 
-Create admin user as root with the following command
-
-```
-/usr/lib/librephotos/bin/librephotos-createadmin <user> <email> <pasword>
-```
-
 As root you can use
 
 ```
