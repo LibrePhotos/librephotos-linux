@@ -9,7 +9,7 @@ systemctl start librephotos-frontend
 systemctl enable librephotos-frontend
 export PATH=/lib/postgresql/13/bin:$PATH
 service postgresql start
-bash ./postgres-entrypoint.sh --name librephotos -e POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+bash ./postgres-entrypoint.sh --name librephotos
 systemctl start postgresql.service
 systemctl enable postgresql.service
 systemctl restart nginx
