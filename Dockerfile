@@ -14,6 +14,7 @@ ENV PGDATA /var/lib/postgresql/data
 ENV POSTGRES_USER docker
 ENV POSTGRES_PASSWORD AaAa1234
 ENV POSTGRES_DB librephotos
+RUN mkdir /docker-entrypoint-initdb.d
 COPY ./docker/postgres-entrypoint.sh /usr/local/bin/
 RUN chmod +rx /usr/local/bin/postgres-entrypoint.sh
 # this 777 will be replaced by 700 at runtime (allows semi-arbitrary "--user" values)
