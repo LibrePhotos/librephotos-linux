@@ -1,12 +1,9 @@
 #!/bin/bash
 
 redis-server --daemonize yes
-systemctl start librephotos-backend 
-systemctl start librephotos-image-similarity.service
-systemctl enable librephotos-backend
-systemctl enable librephotos-image-similarity.service
-systemctl start librephotos-frontend
-systemctl enable librephotos-frontend
+systemctl restart librephotos-backend 
+systemctl restart librephotos-image-similarity.service
+systemctl restart librephotos-frontend
 export PATH=/lib/postgresql/13/bin:$PATH
 postgres-entrypoint.sh postgres
 systemctl start postgresql.service
