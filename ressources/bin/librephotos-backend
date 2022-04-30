@@ -32,8 +32,8 @@ which nproc > /dev/null && NB_WORKER=$(($(nproc)*$NB_PER_PROC))
 if [ "$DEBUG" = 1 ]
 then
     echo "development backend starting"
-    gunicorn --workers=$NB_WORKER --worker-class=gevent --timeout 36000 --reload --bind localhost:8001 --log-level=info ownphotos.wsgi 2>&1 | tee $BASE_LOGS/gunicorn_django.log
+    gunicorn --workers=$NB_WORKER --worker-class=gevent --timeout 36000 --reload --bind 0.0.0.0:8001 --log-level=info ownphotos.wsgi 2>&1 | tee $BASE_LOGS/gunicorn_django.log
 else
     echo "production backend starting"
-    gunicorn --workers=$NB_WORKER --worker-class=gevent --timeout 3600 --bind localhost:8001 --log-level=info ownphotos.wsgi 2>&1 | tee $BASE_LOGS/gunicorn_django.log
+    gunicorn --workers=$NB_WORKER --worker-class=gevent --timeout 3600 --bind 0.0.0.0:8001 --log-level=info ownphotos.wsgi 2>&1 | tee $BASE_LOGS/gunicorn_django.log
 fi
