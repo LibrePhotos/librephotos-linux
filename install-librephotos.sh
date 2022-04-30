@@ -27,7 +27,6 @@ REDIS=( \#REDIS_PASS= \#REDIS_DB= REDIS_HOST=localhost REDIS_PORT=6379 \#REDIS_P
 
 # If postgresql server is NOT local, after installation remove from these files
 # /etc/systemd/system/librephotos-backend.service
-# /etc/systemd/system/librephotos-worker.service
 # these settings:
 # postgresql.service
 # Requires=postgresql.service
@@ -188,9 +187,8 @@ else
   echo "skipping temp database pass removal"
 fi
 
-systemctl start librephotos-worker.service && systemctl start librephotos-backend && systemctl start librephotos-image-similarity.service && echo
+systemctl start librephotos-backend && systemctl start librephotos-image-similarity.service && echo
 systemctl enable librephotos-backend
-systemctl enable librephotos-worker.service
 systemctl enable librephotos-image-similarity.service
 
 # LIBREPHOTOS : FRONTEND
