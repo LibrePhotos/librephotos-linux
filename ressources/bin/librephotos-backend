@@ -23,6 +23,7 @@ python3 manage.py migrate
 python3 manage.py showmigrations
 python3 manage.py build_similarity_index 2>&1 | tee $BASE_LOGS/command_build_similarity_index.log
 python3 manage.py clear_cache
+python3 manage.py rqworker default 2>&1 | tee $BASE_LOGS/rqworker.log
 
 NB_WORKER=2
 NB_PER_PROC=1
