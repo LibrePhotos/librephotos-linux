@@ -25,11 +25,6 @@ python3 manage.py build_similarity_index 2>&1 | tee $BASE_LOGS/command_build_sim
 python3 manage.py clear_cache
 python3 manage.py rqworker default 2>&1 | tee $BASE_LOGS/rqworker.log
 
-if [ "$DEBUG" = 1 ]
-then
-    echo "development backend starting"
-    gunicorn --workers=$NB_WORKER --worker-class=gevent --timeout 36000 --reload --bind 0.0.0.0:8001 --log-level=info ownphotos.wsgi 2>&1 | tee $BASE_LOGS/gunicorn_django.log
-else
-    echo "production backend starting"
-    gunicorn --workers=$NB_WORKER --worker-class=gevent --timeout 3600 --bind 0.0.0.0:8001 --log-level=info ownphotos.wsgi 2>&1 | tee $BASE_LOGS/gunicorn_django.log
-fi
+echo "production backend starting"
+gunicorn --workers=2 --worker-class=gevent --timeout 3600 --bind 0.0.0.0:8001 --log-level=info ownphotos.wsgi 2>&1 | tee $BASE_LOGS/gunicorn_django.log
+
