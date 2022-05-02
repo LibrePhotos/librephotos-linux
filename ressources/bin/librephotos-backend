@@ -23,7 +23,6 @@ python3 manage.py migrate | tee $BASE_LOGS/command_migrate.log
 python3 manage.py showmigrations | tee $BASE_LOGS/show_migrate.log
 python3 manage.py build_similarity_index 2>&1 | tee $BASE_LOGS/command_build_similarity_index.log
 python3 manage.py clear_cache | tee $BASE_LOGS/clear_cache.log
-python3 manage.py rqworker default 2>&1 | tee $BASE_LOGS/rqworker.log
 
 echo "production backend starting"
 gunicorn --workers=2 --worker-class=gevent --timeout 3600 --bind 0.0.0.0:8001 --log-level=info ownphotos.wsgi 2>&1 | tee $BASE_LOGS/gunicorn_django.log
