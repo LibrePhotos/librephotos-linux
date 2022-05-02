@@ -2,6 +2,7 @@
 
 redis-server --daemonize yes
 systemctl restart librephotos-backend 
+systemctl restart librephotos-worker.service
 systemctl restart librephotos-image-similarity.service
 systemctl restart librephotos-frontend
 systemctl restart nginx
