@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -a
+export DJANGO_SETTINGS_MODULE=ownphotos.settings
+python3 manage.py rqworker default 2>&1 | tee $BASE_LOGS/rqworker.log
