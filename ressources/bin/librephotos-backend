@@ -18,7 +18,7 @@ else
     fi
 fi
 
-python3 manage.py showmigrations | tee $BASE_LOGS/logs/show_migrate.log
+python3 manage.py showmigrations | tee $BASE_LOGS/show_migrate.log
 python3 manage.py migrate | tee $BASE_LOGS/command_migrate.log  
 python3 manage.py showmigrations | tee $BASE_LOGS/show_migrate.log
 python3 manage.py build_similarity_index 2>&1 | tee $BASE_LOGS/command_build_similarity_index.log
