@@ -63,7 +63,6 @@ done
 
 if [[ -z "${DOCKERDEPLOY}" ]]; 
 then
-    pg_ctlcluster 13 main start
     systemctl start postgresql.service
     systemctl enable postgresql.service
     su - postgres << EOF
