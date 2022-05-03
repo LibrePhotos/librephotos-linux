@@ -177,6 +177,7 @@ sed -i "s|DB_PORT=|DB_PORT=${DB_PORT}|g" /etc/librephotos/librephotos-backend.en
 sed -i "s|DB_PASS=password|DB_PASS=${pass}|g" /etc/librephotos/librephotos-backend.env
 sed -i "s|FORWARDED_ALLOW_IPS=|FORWARDED_ALLOW_IPS=${FORWARDED_ALLOW_IPS}|g" /etc/librephotos/librephotos-backend.env
 sed -i "s|BASE_DATA=|BASE_DATA=${BASE_DATA}|g" /etc/librephotos/librephotos-backend.env
+sed -i "s|PHOTOS=|PHOTOS=${PHOTOS}|g" /etc/librephotos/librephotos-backend.env
 
 for i in "${REDIS[@]}"; do
   echo $i >> /etc/librephotos/librephotos-backend.env
