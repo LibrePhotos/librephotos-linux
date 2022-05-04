@@ -10,6 +10,11 @@ echo "Use existing secret.key"
 SECRET_KEY=`cat $BASE_LOGS/secret.key`
 export SECRET_KEY=$SECRET_KEY
 
+while ! pg_isready -h ${DB_HOST} -p ${DB_PORT} > /dev/null 2> /dev/null; do
+    echo "Postgres is unavailable"
+    sleep 1
+done
+
 set -a
 export DJANGO_SETTINGS_MODULE=ownphotos.settings
 python3 manage.py rqworker default 2>&1 | tee $BASE_LOGS/rqworker.log
