@@ -1,4 +1,15 @@
 #!/usr/bin/env bash
+
+while [ ! -f $BASE_LOGS/secret.key ]
+do
+  echo "Wait for secret.key"
+  sleep 2 # or less like 0.2
+done
+
+echo "Use existing secret.key"
+SECRET_KEY=`cat $BASE_LOGS/secret.key`
+export SECRET_KEY=$SECRET_KEY
+
 set -a
 export DJANGO_SETTINGS_MODULE=ownphotos.settings
 python3 manage.py rqworker default 2>&1 | tee $BASE_LOGS/rqworker.log
