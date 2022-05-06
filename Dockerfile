@@ -10,6 +10,7 @@ COPY . librephotos-linux
 WORKDIR /librephotos-linux
 RUN ./install-librephotos.sh
 RUN usermod -u 1001 librephotos
+RUN groupmod -g 1001 librephotos
 RUN chown -R librephotos:librephotos /var/log/librephotos
 RUN chown -R librephotos:librephotos /var/lib/librephotos/photos/
 RUN chown -R librephotos:librephotos /var/lib/librephotos/data/protected_media/
