@@ -9,9 +9,6 @@ RUN chmod +x /usr/bin/systemctl.py \
 COPY . librephotos-linux
 WORKDIR /librephotos-linux
 RUN ./install-librephotos.sh
-RUN chown -R librephotos:librephotos /var/log/librephotos
-RUN chown -R librephotos:librephotos /var/lib/librephotos/photos/
-RUN chown -R librephotos:librephotos /var/lib/librephotos/data/protected_media/
 ENV PGDATA /var/lib/postgresql/data
 ENV POSTGRES_USER docker
 ENV POSTGRES_PASSWORD AaAa1234
