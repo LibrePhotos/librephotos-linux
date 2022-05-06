@@ -1,5 +1,8 @@
 #!/bin/bash
 
+chown -R librephotos:librephotos /var/log/librephotos
+chown -R librephotos:librephotos /var/lib/librephotos/photos/
+chown -R librephotos:librephotos /var/lib/librephotos/data/protected_media/
 redis-server --daemonize yes
 systemctl restart librephotos-backend 
 systemctl restart librephotos-worker.service
