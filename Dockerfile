@@ -1,4 +1,4 @@
-FROM ubuntu:hirsute
+FROM ubuntu:impish
 ENV DEBIAN_FRONTEND noninteractive
 ENV DOCKERDEPLOY true
 RUN apt-get update && apt-get install -y systemd
