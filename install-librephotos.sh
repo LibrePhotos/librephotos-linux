@@ -1,11 +1,11 @@
 #!/bin/bash
 
 ######################### HERE EDIT VARIABLES ################################################
-# the location of photos. If changed here, also must change the path in thenginx virtual host.
+# the location of photos. If changed here, also must change the path in the nginx virtual host.
 # /etc/nginx
 export PHOTOS=/var/lib/librephotos/photos
 export BASE_DATA=/var/lib/librephotos/data
-# If your hardware without AVX and SSE instructions, seach in this file by keyword
+# If your hardware without AVX and SSE instructions, search in this file by keyword
 # 'dlib' and read instructions :) Modern system have these
 
 ######## Below change ONLY if you know what are you doing. #####################
@@ -15,17 +15,17 @@ export BASE_DATA=/var/lib/librephotos/data
 # '*' to disable
 export FORWARDED_ALLOW_IPS=
 
-# Postgresql connection settings
+# PostgreSQL connection settings
 DB_HOST=localhost
 DB_PORT=5432
 
 # REDIS connection settings. Unnecessary settings comment with TWO SYMBOLS "\#" or delete.
 # If connection to REDIS  using sock, set REDIS sock permissions to 770 and restart it.
-# Script adds librephotos to redis group.
+# Script adds librephotos to Redis group.
 # for sock connection leave uncommented only REDIS_PATH, all other settings comment out.
 REDIS=( \#REDIS_PASS= \#REDIS_DB= REDIS_HOST=localhost REDIS_PORT=6379 \#REDIS_PATH=/run/redis/redis-server.sock )
 
-# If postgresql server is NOT local, after installation remove from these files
+# If PostgreSQL server is NOT local, after installation remove from these files
 # /etc/systemd/system/librephotos-backend.service
 # /etc/systemd/system/librephotos-worker.service
 # these settings:
@@ -109,7 +109,7 @@ for i in "${REQUIRED_PKG[@]}"; do
 [ $(dpkg-query -W -f='${Status}' $i 2>/dev/null | grep -c "ok installed") -eq 0 ] && apt install --no-install-recommends -y $i
  done
 
-#Optimal. FFTW library. Fourier Transform can be used in the image edtion. Filters, effects, etc. Librephotos have not (yet) these features.
+#Optimal. FFTW library. Fourier Transform can be used in the image edits. Filters, effects, etc. Librephotos have not (yet) these features.
 #wget http://fftw.org/fftw-3.3.10.tar.gz
 #tar xf fftw-3.3.10.tar.gz
 #cd fftw-3.3.10
@@ -134,7 +134,7 @@ ldconfig
 echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib' >>  /usr/lib/librephotos/.bashrc
 cd ..
 else
-echo "VIPS allready found on the system"
+echo "VIPS already found on the system"
 echo "Sometimes older vips can cause problems."
 read -t 5 -p "If librephotos-backend not starting, try to uninstall vips and recompile again"
 fi
@@ -147,8 +147,8 @@ mkdir -p ~/.cache/torch/hub/checkpoints/
 curl -SL https://download.pytorch.org/models/resnet152-b121ed2d.pth -o ~/.cache/torch/hub/checkpoints/resnet152-b121ed2d.pth
 pip3 install torch==1.7.1+cpu torchvision==0.8.2+cpu -f https://download.pytorch.org/whl/torch_stable.html
 #################################################################################################
-# Here seting up AVX and SSE support.
-# Comment out first line 'pip3 install...' and uncoment second. Must leave only one.
+# Here setting up AVX and SSE support.
+# Comment out first line 'pip3 install...' and uncomment second. Must leave only one.
 ##################################################################################################
 pip3 install -v --install-option="--no" --install-option="DLIB_USE_CUDA" dlib
 #pip3 install -v --install-option="--no" --install-option="DLIB_USE_CUDA" --install-option="--no" --install-option="USE_AVX_INSTRUCTIONS" --install-option="--no" --install-option="USE_SSE4_INSTRUCTIONS" dlib
@@ -164,11 +164,11 @@ EOF
 
 usermod -aG redis librephotos
 [ -d /usr/lib/librephotos/bin ] || mkdir -p /usr/lib/librephotos/bin
-cp ressources/bin/* /usr/lib/librephotos/bin/
+cp resources/bin/* /usr/lib/librephotos/bin/
 ln -fs /usr/lib/librephotos/bin/librephotos-cli /usr/sbin/librephotos-cli
 chown -R librephotos:librephotos  /usr/lib/librephotos/bin/
-cp -r ressources/etc/librephotos/ /etc/
-cp ressources/systemd/* /etc/systemd/system/
+cp -r resources/etc/librephotos/ /etc/
+cp resources/systemd/* /etc/systemd/system/
 
 
 sed -i "s|DB_HOST=|DB_HOST=${DB_HOST}|g" /etc/librephotos/librephotos-backend.env
@@ -220,13 +220,14 @@ systemctl enable librephotos-frontend
 if [ $(dpkg-query -W -f='${Status}' nginx* 2>/dev/null | grep -c "ok installed") -eq 0 ];
   then
     apt install -y nginx
-    cp ressources/etc/nginx/nginx.conf /etc/nginx/nginx.conf
+    cp resources/etc/nginx/nginx.conf /etc/nginx/nginx.conf
     systemctl restart nginx
   else
-    cp ressources/etc/nginx/librephotos /etc/nginx/sites-available/librephotos
+    cp resources/etc/nginx/librephotos /etc/nginx/sites-available/librephotos
     ln -s /etc/nginx/sites-available/librephotos /etc/nginx/sites-enabled/
 fi
 echo "If system has the nginx server before installing librephotos, edit virtual host /etc/nginx/librephotos and restart nginx."
 echo "Optimal: check other settings in the file /etc/librephotos/librephotos-backend.env"
-echo "After changing BASE_DATA, must edit file /etc/nginx/nginx.conf or /etc/nginx/sites-available/librephotos and change accordinaly"
+echo "After changing BASE_DATA, must edit file /etc/nginx/nginx.conf, or /etc/nginx/sites-available/librephotos and change accordingly"
 echo "alias. There  4 lines"-
+
