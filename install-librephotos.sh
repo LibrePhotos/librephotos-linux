@@ -55,6 +55,12 @@ chown -R librephotos:librephotos $BASE_LOGS
 chown -R librephotos:librephotos $PHOTOS
 chown -R librephotos:librephotos $BASE_DATA
 
+# Add PPA to install older postgresql version
+# Create the file repository configuration:
+sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+# Import the repository signing key:
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+
 # CREATING DATABASE
 REQUIRED_PKG=(postgresql-13)
 for i in "${REQUIRED_PKG[@]}"; do
