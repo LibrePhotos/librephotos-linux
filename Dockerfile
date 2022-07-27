@@ -1,4 +1,4 @@
-FROM ubuntu:impish
+FROM ubuntu:jammy
 ENV DEBIAN_FRONTEND noninteractive
 ENV DOCKERDEPLOY true
 RUN apt-get update && apt-get install -y systemd
