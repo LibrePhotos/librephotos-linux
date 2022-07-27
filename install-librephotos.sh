@@ -56,7 +56,7 @@ chown -R librephotos:librephotos $PHOTOS
 chown -R librephotos:librephotos $BASE_DATA
 
 # Add PPA to install older postgresql version
-REQUIRED_PKG=(wget)
+REQUIRED_PKG=(wget gnupg gnupg2 gnupg1)
 for i in "${REQUIRED_PKG[@]}"; do
 [ $(dpkg-query -W -f='${Status}' $i 2>/dev/null | grep -c "ok installed") -eq 0 ] && apt install --no-install-recommends -y $i
 done
