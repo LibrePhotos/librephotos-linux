@@ -2,6 +2,7 @@ FROM ubuntu:jammy
 ENV DEBIAN_FRONTEND noninteractive
 ENV DOCKERDEPLOY true
 ENV LANG en_US.utf8
+RUN update-locale LANG=en_US.utf8
 RUN apt-get update && apt-get install -y systemd
 RUN apt-get install gosu
 COPY docker/systemctl.py /usr/bin/systemctl.py
