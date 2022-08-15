@@ -17,6 +17,6 @@ systemctl restart librephotos-image-similarity.service
 systemctl restart librephotos-frontend
 systemctl restart nginx
 export PATH=/lib/postgresql/13/bin:$PATH
-postgres-entrypoint.sh postgres --encoding=UTF-8
+postgres-entrypoint.sh postgres
 # keep container running
 while true; do sleep 1; done
