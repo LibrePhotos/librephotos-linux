@@ -3,6 +3,8 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV DOCKERDEPLOY true
 ENV LC_ALL en_US.UTF-8
 ENV LANG en_US.utf8
+RUN locale-gen en_US.UTF-8
+RUN dpkg-reconfigure locales
 RUN apt-get update && apt-get install -y systemd
 RUN apt-get install gosu
 COPY docker/systemctl.py /usr/bin/systemctl.py
