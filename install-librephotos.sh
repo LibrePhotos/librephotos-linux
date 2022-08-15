@@ -121,18 +121,6 @@ for i in "${REQUIRED_PKG[@]}"; do
 [ $(dpkg-query -W -f='${Status}' $i 2>/dev/null | grep -c "ok installed") -eq 0 ] && apt install --no-install-recommends -y $i
  done
 
-#Optimal. FFTW library. Fourier Transform can be used in the image edits. Filters, effects, etc. Librephotos have not (yet) these features.
-#wget http://fftw.org/fftw-3.3.10.tar.gz
-#tar xf fftw-3.3.10.tar.gz
-#cd fftw-3.3.10
-# FFTW. if CPU support sse2, avx, uncomment below.
-# More info about optimization: http://fftw.org/fftw3_doc/Installation-on-Unix.html
-#./configure --enable-threads --with-pic #--enable-sse2 --enable-avx
-#make -j$(nproc --all)
-#make install
-#ldconfig
-#cd ..
-
 # Compiling libvips from source. Installed libvips42 from repositories not working.
 if ! which vips; then
 wget https://github.com/libvips/libvips/releases/download/v8.12.1/vips-8.12.1.tar.gz
