@@ -5,8 +5,6 @@
 # /etc/nginx
 export PHOTOS=/var/lib/librephotos/photos
 export BASE_DATA=/var/lib/librephotos/data
-# If your hardware without AVX and SSE instructions, search in this file by keyword
-# 'dlib' and read instructions :) Modern system have these
 
 ######## Below change ONLY if you know what are you doing. #####################
 # Front-end’s IPs from which allowed to handle set secure headers. (comma separate).
@@ -146,14 +144,7 @@ curl -SL https://github.com/LibrePhotos/librephotos-docker/releases/download/0.1
 mkdir -p ~/.cache/torch/hub/checkpoints/
 curl -SL https://download.pytorch.org/models/resnet152-b121ed2d.pth -o ~/.cache/torch/hub/checkpoints/resnet152-b121ed2d.pth
 pip3 install torch==1.7.1+cpu torchvision==0.8.2+cpu -f https://download.pytorch.org/whl/torch_stable.html
-#################################################################################################
-# Here setting up AVX and SSE support.
-# Comment out first line 'pip3 install...' and uncomment second. Must leave only one.
-##################################################################################################
 pip3 install -v --install-option="--no" --install-option="DLIB_USE_CUDA" dlib
-#pip3 install -v --install-option="--no" --install-option="DLIB_USE_CUDA" --install-option="--no" --install-option="USE_AVX_INSTRUCTIONS" --install-option="--no" --install-option="USE_SSE4_INSTRUCTIONS" dlib
-#This does only support x64 and not ARM. To install for ARM you have to build it from source
-pip3 install faiss-cpu
 pip3 install pyvips
 git clone https://github.com/LibrePhotos/librephotos.git backend
 cd backend
