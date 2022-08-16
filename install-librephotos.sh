@@ -29,8 +29,6 @@ REDIS=( \#REDIS_PASS= \#REDIS_DB= REDIS_HOST=localhost REDIS_PORT=6379 \#REDIS_P
 # these settings:
 # postgresql.service
 # Requires=postgresql.service
-
-# If CPU supports SSE2, AVX, find in the script FFTW and uncomment configure settings
 ######################### END OF EDITABLE SECTION #########################################
 
 set -exa
