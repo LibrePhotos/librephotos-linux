@@ -76,16 +76,11 @@ then
     su - postgres << EOF
 psql -c 'DROP DATABASE IF EXISTS librephotos;'
 psql -c 'DROP USER IF EXISTS librephotos;'
-psql -c 'CREATE USER librephotos;'
+psql -c 'CREATE USER docker with encrypted password 'AaAa1234';'
 psql -c 'CREATE DATABASE "librephotos" WITH OWNER "librephotos" TEMPLATE = template0 ENCODING = "UTF8";'
 psql -c 'GRANT ALL privileges ON DATABASE librephotos TO librephotos;'
 exit
 EOF
-    echo 'su - postgres -c "psql -U postgres -d postgres -c \"alter user librephotos with password tmp_password;\""' > /tmp/database_pass
-    pass=$( < /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-12};)
-    sed -i "s|tmp_password|'${pass}'|g" /tmp/database_pass
-    chmod +x /tmp/database_pass
-    /tmp/database_pass
 else
     echo "skipping db init"
 fi
