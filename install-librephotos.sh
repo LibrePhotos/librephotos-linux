@@ -74,11 +74,11 @@ then
     systemctl start postgresql.service
     systemctl enable postgresql.service
     su - postgres << EOF
-psql -c 'DROP DATABASE IF EXISTS librephotos;'
-psql -c 'DROP USER IF EXISTS librephotos;'
-psql -c 'CREATE USER docker with encrypted password 'AaAa1234';'
-psql -c 'CREATE DATABASE "librephotos" WITH OWNER "librephotos" TEMPLATE = template0 ENCODING = "UTF8";'
-psql -c 'GRANT ALL privileges ON DATABASE librephotos TO librephotos;'
+psql -c "DROP DATABASE IF EXISTS librephotos;"
+psql -c "DROP USER IF EXISTS librephotos;"
+psql -c "CREATE USER docker with encrypted password 'AaAa1234';"
+psql -c "CREATE DATABASE librephotos WITH OWNER librephotos TEMPLATE = template0 ENCODING = 'UTF8';"
+psql -c "GRANT ALL privileges ON DATABASE librephotos TO librephotos;"
 exit
 EOF
 else
