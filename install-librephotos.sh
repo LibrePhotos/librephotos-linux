@@ -16,6 +16,9 @@ export FORWARDED_ALLOW_IPS=
 # PostgreSQL connection settings
 DB_HOST=localhost
 DB_PORT=5432
+# DB_USER Must match DB_USER in resources/etc/librephotos/librephotos-backend.env
+# and not be used by other installed software. This user will be removed and recreated.
+DB_USER=docker
 
 # REDIS connection settings. Unnecessary settings comment with TWO SYMBOLS "\#" or delete.
 # If connection to REDIS  using sock, set REDIS sock permissions to 770 and restart it.
@@ -75,10 +78,10 @@ then
     systemctl enable postgresql.service
     su - postgres << EOF
 psql -c "DROP DATABASE IF EXISTS librephotos;"
-psql -c "DROP USER IF EXISTS librephotos;"
-psql -c "CREATE USER docker with encrypted password 'AaAa1234';"
-psql -c "CREATE DATABASE librephotos WITH OWNER librephotos TEMPLATE = template0 ENCODING = 'UTF8';"
-psql -c "GRANT ALL privileges ON DATABASE librephotos TO librephotos;"
+psql -c "DROP USER IF EXISTS $DB_USER;"
+psql -c "CREATE USER $DB_USER with encrypted password 'AaAa1234';"
+psql -c "CREATE DATABASE librephotos WITH OWNER $DB_USER TEMPLATE = template0 ENCODING = 'UTF8';"
+psql -c "GRANT ALL privileges ON DATABASE librephotos TO $DB_USER;"
 exit
 EOF
 else
@@ -166,7 +169,7 @@ for i in "${REDIS[@]}"; do
   echo $i >> /etc/librephotos/librephotos-backend.env
 done
 
-if [[ -z "${DOCKERDEPLOY}" ]]; then
+if [ -z "${DOCKERDEPLOY}" ] && [ -e /tmp/database_pass ]; then
     rm /tmp/database_pass
 else
   echo "skipping temp database pass removal"
