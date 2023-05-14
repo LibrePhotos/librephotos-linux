@@ -172,10 +172,15 @@ else
   echo "skipping temp database pass removal"
 fi
 
-systemctl start librephotos-worker.service && systemctl start librephotos-backend && systemctl start librephotos-image-similarity.service && echo
+systemctl start librephotos-worker.service && \
+systemctl start librephotos-backend && \
+systemctl start librephotos-image-similarity.service && \
+systemctl start librephotos-thumbnail.service && \
+echo
 systemctl enable librephotos-backend
 systemctl enable librephotos-worker.service
 systemctl enable librephotos-image-similarity.service
+systemctl enable librephotos-thumbnail.service
 
 # LIBREPHOTOS : FRONTEND
 REQUIRED_PKG=( curl git xsel git )

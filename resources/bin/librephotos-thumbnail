@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+python3 service/thumbnail/main.py 2>&1 | tee $BASE_LOGS/thumbnail.log

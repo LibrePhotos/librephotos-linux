@@ -11,6 +11,7 @@ EOF
 systemctl disable librephotos-backend
 systemctl disable librephotos-worker.service
 systemctl disable librephotos-image-similarity.service
+systemctl disable librephotos-thumbnail.service
 systemctl disable librephotos-backend
 rm -r /etc/systemd/system/librephotos-*
 userdel -fr librephotos
@@ -57,6 +58,7 @@ userdel -fr librephotos
 systemctl disable librephotos-backend
 systemctl disable librephotos-worker.service
 systemctl disable librephotos-image-similarity.service
+systemctl disable librephotos-thumbnail.service
 systemctl disable librephotos-backend
 ```
 And removing service files:

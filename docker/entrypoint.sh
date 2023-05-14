@@ -14,6 +14,7 @@ redis-server --daemonize yes
 systemctl restart librephotos-backend 
 systemctl restart librephotos-worker.service
 systemctl restart librephotos-image-similarity.service
+systemctl restart librephotos-thumbnail.service
 systemctl restart librephotos-frontend
 systemctl restart nginx
 export PATH=/lib/postgresql/13/bin:$PATH
