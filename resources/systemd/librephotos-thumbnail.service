@@ -1,0 +1,14 @@
+[Unit]
+Description=librephotos-thumbnail
+Documentation=https://github.com/LibrePhotos/librephotos
+
+After=network.target
+
+[Service]
+User=librephotos
+Group=librephotos
+ExecStart=/usr/lib/librephotos/bin/librephotos-thumbnail
+WorkingDirectory=/usr/lib/librephotos/backend
+
+[Install]
+WantedBy=multi-user.target

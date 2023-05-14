@@ -60,6 +60,7 @@ Installed systemd services:
 
 ```
 librephotos-image-similarity.service
+librephotos-thumbnail.service
 librephotos-worker.service
 librephotos-backend
 librephotos-frontend
