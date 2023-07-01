@@ -139,7 +139,7 @@ curl -SL https://github.com/LibrePhotos/librephotos-docker/releases/download/0.1
 curl -SL https://github.com/LibrePhotos/librephotos-docker/releases/download/0.1/clip-embeddings.tar.gz | tar -zxC $BASE_DATA/data_models/
 mkdir -p ~/.cache/torch/hub/checkpoints/
 curl -SL https://download.pytorch.org/models/resnet152-b121ed2d.pth -o ~/.cache/torch/hub/checkpoints/resnet152-b121ed2d.pth
-pip3 install torch==1.7.1+cpu torchvision==0.8.2+cpu -f https://download.pytorch.org/whl/torch_stable.html
+pip3 install --no-cache-dir torch torchvision --extra-index-url https://download.pytorch.org/whl/cpu
 pip3 install -v --install-option="--no" --install-option="DLIB_USE_CUDA" dlib
 pip3 install pyvips
 git clone https://github.com/LibrePhotos/librephotos.git backend
