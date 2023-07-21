@@ -142,7 +142,7 @@ EOF
 
 # POST INSTALL
 
-usermod -aG librephotos
+usermod -a librephotos
 [ -d /usr/lib/librephotos/bin ] || mkdir -p /usr/lib/librephotos/bin
 cp resources/bin/* /usr/lib/librephotos/bin/
 ln -fs /usr/lib/librephotos/bin/librephotos-cli /usr/sbin/librephotos-cli
