@@ -20,13 +20,7 @@ DB_PORT=5432
 # and not be used by other installed software. This user will be removed and recreated.
 DB_USER=docker
 
-# REDIS connection settings. Unnecessary settings comment with TWO SYMBOLS "\#" or delete.
-# If connection to REDIS  using sock, set REDIS sock permissions to 770 and restart it.
-# Script adds librephotos to Redis group.
-# for sock connection leave uncommented only REDIS_PATH, all other settings comment out.
-REDIS=( \#REDIS_PASS= \#REDIS_DB= REDIS_HOST=localhost REDIS_PORT=6379 \#REDIS_PATH=/run/redis/redis-server.sock )
-
-# If PostgreSQL server is NOT local, after installation remove from these files
+# If postgresql server is NOT local, after installation remove from these files
 # /etc/systemd/system/librephotos-backend.service
 # /etc/systemd/system/librephotos-worker.service
 # these settings:
@@ -93,11 +87,10 @@ fi
 
 REQUIRED_PKG=( wget swig ffmpeg libimage-exiftool-perl libpq-dev  curl libopenblas-dev libmagic1 libboost-all-dev libxrender-dev \
 liblapack-dev git bzip2 cmake build-essential libsm6 libglib2.0-0 libgl1-mesa-glx gfortran gunicorn \
-libheif-dev libssl-dev rustc liblzma-dev python3 python3-pip imagemagick redis-server )
+libheif-dev libssl-dev rustc liblzma-dev python3 python3-pip imagemagick )
 for i in "${REQUIRED_PKG[@]}"; do
 [ $(dpkg-query -W -f='${Status}' $i 2>/dev/null | grep -c "ok installed") -eq 0 ] && apt install --no-install-recommends -y $i
 done
-redis-server --daemonize yes
 # This part compiles libvips. More info https://libvips.github.io/libvips/install.html
 REQUIRED_PKG=( build-essential pkg-config libglib2.0-dev libexpat1-dev libgsf-1-dev liborc-dev libexif-dev libtiff-dev \
  librsvg2-dev libpng-dev libwebp-dev )
@@ -149,7 +142,7 @@ EOF
 
 # POST INSTALL
 
-usermod -aG redis librephotos
+usermod -aG librephotos
 [ -d /usr/lib/librephotos/bin ] || mkdir -p /usr/lib/librephotos/bin
 cp resources/bin/* /usr/lib/librephotos/bin/
 ln -fs /usr/lib/librephotos/bin/librephotos-cli /usr/sbin/librephotos-cli
@@ -164,10 +157,6 @@ sed -i "s|DB_PASS=password|DB_PASS=${pass}|g" /etc/librephotos/librephotos-backe
 sed -i "s|FORWARDED_ALLOW_IPS=|FORWARDED_ALLOW_IPS=${FORWARDED_ALLOW_IPS}|g" /etc/librephotos/librephotos-backend.env
 sed -i "s|BASE_DATA=|BASE_DATA=${BASE_DATA}|g" /etc/librephotos/librephotos-backend.env
 sed -i "s|PHOTOS=|PHOTOS=${PHOTOS}|g" /etc/librephotos/librephotos-backend.env
-
-for i in "${REDIS[@]}"; do
-  echo $i >> /etc/librephotos/librephotos-backend.env
-done
 
 if [ -z "${DOCKERDEPLOY}" ] && [ -e /tmp/database_pass ]; then
     rm /tmp/database_pass
