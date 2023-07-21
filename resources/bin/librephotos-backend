@@ -25,15 +25,15 @@ else
     fi
 fi
 
-python manage.py showmigrations | tee /logs/show_migrate.log
-python manage.py migrate | tee /logs/command_migrate.log
-python manage.py showmigrations | tee /logs/show_migrate.log
+python manage.py showmigrations | tee $BASE_LOGS//show_migrate.log
+python manage.py migrate | tee $BASE_LOGS//command_migrate.log
+python manage.py showmigrations | tee $BASE_LOGS//show_migrate.log
 python manage.py collectstatic --no-input
-python image_similarity/main.py 2>&1 | tee /logs/gunicorn_image_similarity.log &
-python service/thumbnail/main.py 2>&1 | tee /logs/gunicorn_thumbnail.log &
+python image_similarity/main.py 2>&1 | tee $BASE_LOGS//gunicorn_image_similarity.log &
+python service/thumbnail/main.py 2>&1 | tee $BASE_LOGS//gunicorn_thumbnail.log &
 python manage.py clear_cache 
-python manage.py build_similarity_index 2>&1 | tee /logs/command_build_similarity_index.log
-python manage.py qcluster 2>&1 | tee /logs/qcluster.log &
+python manage.py build_similarity_index 2>&1 | tee $BASE_LOGS//command_build_similarity_index.log
+python manage.py qcluster 2>&1 | tee $BASE_LOGS//qcluster.log &
 
 echo "production backend starting"
 gunicorn --workers=2 --worker-class=gevent --timeout 3600 --bind 127.0.0.1:8001 --log-level=info ownphotos.wsgi 2>&1 | tee $BASE_LOGS/gunicorn_django.log
