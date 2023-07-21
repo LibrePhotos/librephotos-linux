@@ -29,8 +29,6 @@ python3 manage.py showmigrations | tee $BASE_LOGS/show_migrate.log
 python3 manage.py migrate | tee $BASE_LOGS/command_migrate.log
 python3 manage.py showmigrations | tee $BASE_LOGS/show_migrate.log
 python3 manage.py collectstatic --no-input
-python3 image_similarity/main.py 2>&1 | tee $BASE_LOGS/gunicorn_image_similarity.log &
-python3 service/thumbnail/main.py 2>&1 | tee $BASE_LOGS/gunicorn_thumbnail.log &
 python3 manage.py clear_cache 
 python3 manage.py build_similarity_index 2>&1 | tee $BASE_LOGS/command_build_similarity_index.log
 python3 manage.py qcluster 2>&1 | tee $BASE_LOGS/qcluster.log &
