@@ -1,3 +1,5 @@
+# This solution was not maintainable and is now deprecated
+
 # LibrePhotos installation script for Linux
 
 Currently, these are in a early stage; some bugs may exist. If you find any, please log an issue
