@@ -131,6 +131,8 @@ curl -SL https://github.com/LibrePhotos/librephotos-docker/releases/download/0.1
 curl -SL https://github.com/LibrePhotos/librephotos-docker/releases/download/0.1/im2txt.tar.gz | tar -zxC $BASE_DATA/data_models/
 curl -SL https://github.com/LibrePhotos/librephotos-docker/releases/download/0.1/clip-embeddings.tar.gz | tar -zxC $BASE_DATA/data_models/
 mkdir -p ~/.cache/torch/hub/checkpoints/
+# Make sure pip can do it's work
+rm /usr/lib/python3.11/EXTERNALLY-MANAGED
 curl -SL https://download.pytorch.org/models/resnet152-b121ed2d.pth -o ~/.cache/torch/hub/checkpoints/resnet152-b121ed2d.pth
 pip3 install --no-cache-dir torch torchvision --extra-index-url https://download.pytorch.org/whl/cpu
 pip3 install -v --install-option="--no" --install-option="DLIB_USE_CUDA" dlib
@@ -142,7 +144,7 @@ EOF
 
 # POST INSTALL
 
-usermod -a librephotos
+usermod -a librephotos -G librephotos
 [ -d /usr/lib/librephotos/bin ] || mkdir -p /usr/lib/librephotos/bin
 cp resources/bin/* /usr/lib/librephotos/bin/
 ln -fs /usr/lib/librephotos/bin/librephotos-cli /usr/sbin/librephotos-cli
